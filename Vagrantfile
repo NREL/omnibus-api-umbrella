@@ -40,7 +40,7 @@ Vagrant.configure('2') do |config|
   end
 
   # Ensure a recent version of the Chef Omnibus packages are installed
-  config.omnibus.chef_version = '11.6.2'
+  config.omnibus.chef_version = '11.10.0'
 
   # Enable the berkshelf-vagrant plugin
   config.berkshelf.enabled = true
@@ -62,7 +62,7 @@ Vagrant.configure('2') do |config|
     }
 
     chef.run_list = [
-      'recipe[omnibus::default]'
+      'recipe[omnibus::default]',
     ]
   end
 

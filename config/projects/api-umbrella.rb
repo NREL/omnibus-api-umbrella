@@ -1,7 +1,6 @@
-
 name "api-umbrella"
-maintainer "CHANGE ME"
-homepage "CHANGEME.com"
+maintainer "National Renewable Energy Laboratory"
+homepage "http://github.com/NREL/api-umbrella"
 
 replaces        "api-umbrella"
 install_path    "/opt/api-umbrella"
@@ -12,7 +11,15 @@ build_iteration 1
 dependency "preparation"
 
 # api-umbrella dependencies/components
-# dependency "somedep"
+dependency "elasticsearch"
+dependency "logrotate"
+dependency "mongodb"
+dependency "nginx"
+dependency "nodejs"
+dependency "redis"
+dependency "ruby"
+dependency "supervisor"
+dependency "varnish"
 
 # version manifest file
 dependency "version-manifest"
