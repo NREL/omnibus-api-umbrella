@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Perform necessary api-umbrella removal steps
+# after package is uninstalled.
+#
+
+echo "api-umbrella has been uninstalled!"
+
+exit 0
