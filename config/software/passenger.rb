@@ -1,9 +1,10 @@
 name "passenger"
-version "4.0.37"
+default_version "4.0.41"
 
 dependency "curl"
 dependency "openssl"
 dependency "pcre"
+dependency "ruby"
 dependency "rubygems"
 dependency "zlib"
 

@@ -5,3 +5,8 @@
 #
 
 echo "You're about to install api-umbrella!"
+
+getent group api-umbrella > /dev/null || groupadd -r api-umbrella
+getent passwd api-umbrella > /dev/null || useradd -r \
+  -d /opt/api-umbrella -g api-umbrella -s /sbin/nologin \
+  -c "API Umbrella user" api-umbrella

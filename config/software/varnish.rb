@@ -1,5 +1,5 @@
 name "varnish"
-version "3.0.5"
+default_version "3.0.5"
 
 dependency "pcre"
 dependency "readline"
@@ -11,12 +11,6 @@ source :url => "http://repo.varnish-cache.org/source/varnish-#{version}.tar.gz",
 relative_path "varnish-#{version}"
 
 env = {
-=begin
-  "PCRE_LIBS" => "-L#{install_dir}/embedded/lib -lpcre",
-  "LDFLAGS" => "-L#{install_dir}/embedded/lib -lpcre",
-  "LD_RUN_PATH" => "-L#{install_dir}/embedded/lib -lpcre",
-  "PCRE_CFLAGS" => "-I#{install_dir}/embedded/include",
-=end
   "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}",
   "PCRE_LIBS" => "-L#{install_dir}/embedded/lib -lpcre",
   "PCRE_CFLAGS" => "-I#{install_dir}/embedded/include",

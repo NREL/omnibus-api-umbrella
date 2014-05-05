@@ -1,0 +1,10 @@
+--- readline-6.2/support/shobj-conf.orig	2014-04-27 13:32:28.000000000 -0600
++++ readline-6.2/support/shobj-conf	2014-04-27 13:32:42.000000000 -0600
+@@ -116,6 +116,7 @@
+ 
+ 	SHLIB_XLDFLAGS='-Wl,-rpath,$(libdir) -Wl,-soname,`basename $@ $(SHLIB_MINOR)`'
+ 	SHLIB_LIBVERSION='$(SHLIB_LIBSUFF).$(SHLIB_MAJOR)$(SHLIB_MINOR)'
++	SHLIB_LIBS='-lncurses'
+ 	;;
+ 
+ freebsd2*)

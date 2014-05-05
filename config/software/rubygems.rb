@@ -15,19 +15,27 @@
 # limitations under the License.
 #
 
-name "redis"
-default_version "2.8.8"
+name "rubygems"
+default_version "1.8.24"
 
-source :url => "http://download.redis.io/releases/redis-#{version}.tar.gz",
-       :md5 => "f3af82ca88b9d84c81d0b77614d07426"
+dependency "ruby"
 
-relative_path "redis-#{version}"
+version "1.8.24" do
+  source md5: "3a555b9d579f6a1a1e110628f5110c6b"
+end
 
-make_args = ["PREFIX=#{install_dir}/embedded",
-             "CFLAGS='-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include'",
-             "LD_RUN_PATH=#{install_dir}/embedded/lib"].join(" ")
+version "2.2.1" do
+  source md5: "1f0017af0ad3d3ed52665132f80e7443"
+end
+
+version "2.2.2" do
+  source md5: "f297a3fa7b1f3b693a11183a31668b9b"
+end
+
+source url: "http://production.cf.rubygems.org/rubygems/rubygems-#{version}.tgz"
+
+relative_path "rubygems-#{version}"
 
 build do
-  command ["make -j #{max_build_jobs}", make_args].join(" ")
-  command ["make install", make_args].join(" ")
+  ruby "setup.rb"
 end

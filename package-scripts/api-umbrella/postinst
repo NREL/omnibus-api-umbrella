@@ -12,6 +12,8 @@ function error_exit
   exit 1
 }
 
+chmod 1777 /opt/api-umbrella/var/lib/nginx/tmp
+
 echo "Thank you for installing api-umbrella!"
 
 exit 0

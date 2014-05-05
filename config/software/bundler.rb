@@ -1,5 +1,5 @@
 #
-# Copyright:: Copyright (c) 2013 Opscode, Inc.
+# Copyright:: Copyright (c) 2012-2014 Chef Software, Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,23 +15,11 @@
 # limitations under the License.
 #
 
-name "nodejs"
-version "0.10.25"
+name "bundler"
+default_version "1.6.2"
 
-source :url => "http://nodejs.org/dist/v#{version}/node-v#{version}.tar.gz",
-       :md5 => "153bdbf77b4473df2600b8ce123ef331"
-
-relative_path "node-v#{version}"
-
-# Ensure we run with Python 2.6 on Redhats < 6
-if OHAI['platform_family'] == "rhel" && OHAI['platform_version'].to_f < 6
-  python = 'python26'
-else
-  python = 'python'
-end
+dependency "rubygems" unless platform == 'windows'
 
 build do
-  command "#{python} ./configure --prefix=#{install_dir}/embedded"
-  command "make -j #{max_build_jobs}"
-  command "make install"
+  gem "install bundler --no-rdoc --no-ri -v '#{version}'"
 end

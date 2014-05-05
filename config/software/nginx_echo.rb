@@ -1,4 +1,6 @@
 name "nginx_echo"
-version "v0.51"
+default_version "v0.53"
 
 source :git => "https://github.com/agentzh/echo-nginx-module.git"
+
+relative_path "#{name}-#{version}"
