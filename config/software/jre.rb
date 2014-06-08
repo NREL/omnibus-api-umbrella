@@ -16,7 +16,7 @@
 #
 
 name "jre"
-default_version "7u55-b13"
+default_version "7u60-b19"
 
 dependency "rsync"
 
@@ -25,20 +25,26 @@ whitelist_file "jre/bin/policytool"
 whitelist_file "jre/lib"
 whitelist_file "jre/plugin"
 
+version_parts = version.match(/((\d+)u(\d+))-b(\d+)/)
+version_with_update = version_parts[1]
+version_major = version_parts[2]
+version_update = version_parts[3]
+version_build = version_parts[4]
+
 if OHAI.kernel['machine'] =~ /x86_64/
   # TODO: download x86 version on x86 machines
-  source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-7u55-linux-x64.tar.gz",
-         :md5 => "5dea1a4d745c55c933ef87c8227c4bd5",
-         :cookie => 's_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html;',
+  source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-#{version_with_update}-linux-x64.tar.gz",
+         :md5 => "53a787c9a3170308641074cd86606a99",
+         :cookie => "s_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre#{version_major}-downloads-1880261.html;",
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
 else
-  source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-7u55-linux-i586.tar.gz",
-         :md5 => "9e363fb6fdd072d04aa5862a8e06e6c2",
-         :cookie => 's_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html;',
+  source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-#{version_with_update}-linux-i586.tar.gz",
+         :md5 => "331a7ef8230de0939941d1e9b3b761fd",
+         :cookie => "s_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre#{version_major}7-downloads-1880261.html;",
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
 end
 
-relative_path "jre1.7.0_55"
+relative_path "jre1.#{version_major}.0_#{version_update}"
 
 jre_dir = "#{install_dir}/embedded/jre"
 

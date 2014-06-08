@@ -19,7 +19,7 @@ Usage
 You create a platform-specific package using the `build project` command:
 
 ```shell
-$ bin/omnibus build project api-umbrella
+$ bin/omnibus build api-umbrella
 ```
 
 The platform/architecture type of the package created will match the platform
@@ -33,7 +33,7 @@ You can clean up all temporary files generated during the build process with
 the `clean` command:
 
 ```shell
-$ bin/omnibus clean
+$ bin/omnibus clean api-umbrella
 ```
 
 Adding the `--purge` purge option removes __ALL__ files generated during the
@@ -41,7 +41,7 @@ build including the project install directory (`/opt/api-umbrella`) and
 the package cache directory (`/var/cache/omnibus/pkg`):
 
 ```shell
-$ bin/omnibus clean --purge
+$ bin/omnibus clean api-umbrella --purge
 ```
 
 ### Help
@@ -56,8 +56,7 @@ $ bin/omnibus help
 Kitchen-based Build Environment
 -------------------------------
 Every Omnibus project ships will a project-specific
-[Berksfile](http://berkshelf.com/) and [Vagrantfile](http://www.vagrantup.com/)
-that will allow you to build your omnibus projects on all of the projects listed
+[Berksfile](http://berkshelf.com/) that will allow you to build your omnibus projects on all of the projects listed
 in the `.kitchen.yml`. You can add/remove additional platforms as needed by
 changing the list found in the `.kitchen.yml` `platforms` YAML stanza.
 
@@ -76,18 +75,18 @@ liking, you can bring up an individual build environment using the `kitchen`
 command.
 
 ```shell
-$ bundle exec kitchen converge ubuntu-12.04
+$ bin/kitchen converge ubuntu-12.04
 ```
 
 Then login to the instance and build the project as described in the Usage
 section:
 
 ```shell
-$ bundle exec kitchen login ubuntu-12.04
+$ bin/kitchen login ubuntu-12.04
 [vagrant@ubuntu...] $ cd api-umbrella
 [vagrant@ubuntu...] $ bundle install
 [vagrant@ubuntu...] $ ...
-[vagrant@ubuntu...] $ ./bin/omnibus build project api-umbrella
+[vagrant@ubuntu...] $ bin/omnibus build api-umbrella
 ```
 
 For a complete list of all commands and platforms, run `kitchen list` or

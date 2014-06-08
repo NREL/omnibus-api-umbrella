@@ -16,7 +16,7 @@
 #
 
 name "nginx"
-default_version "1.4.7"
+default_version "1.7.1"
 
 dependency "pcre"
 dependency "openssl"
@@ -26,7 +26,7 @@ dependency "nginx_headers_more"
 dependency "nginx_x_rid_header"
 
 source :url => "http://nginx.org/download/nginx-#{version}.tar.gz",
-       :md5 => "aee151d298dcbfeb88b3f7dd3e7a4d17"
+       :md5 => "9659cbb26f226f6390b18ef991a79233"
 
 relative_path "nginx-#{version}"
 
@@ -58,7 +58,7 @@ build do
            "--add-module=#{source_dir}/nginx_echo-v0.53",
            "--add-module=#{source_dir}/nginx_headers_more-v0.25",
            "--add-module=#{source_dir}/nginx_x_rid_header-0daa3cc283d91a279a6013734fd78264582fce51",
-           "--add-module=#{install_dir}/embedded/lib/ruby/gems/2.1.0/gems/passenger-4.0.41/ext/nginx",
+           "--add-module=#{install_dir}/embedded/lib/ruby/gems/2.1.0/gems/passenger-4.0.44/ext/nginx",
            "--with-ipv6",
            "--with-debug",
            "--with-ld-opt=\"-L#{install_dir}/embedded/lib -luuid\"",

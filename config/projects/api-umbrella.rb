@@ -3,12 +3,11 @@ name 'api-umbrella'
 maintainer 'National Renewable Energy Laboratory'
 homepage 'http://github.com/NREL/api-umbrella'
 
-replaces        'api-umbrella'
 install_path    '/opt/api-umbrella'
-build_version   Omnibus::BuildVersion.new.semver
+build_version   Omnibus::BuildVersion.semver
 build_iteration 1
 
-override :nodejs, version: '0.10.26'
+override :nodejs, version: '0.10.28'
 override :ruby, version: '2.1.1'
 override :rubygems, version: '2.2.2'
 
@@ -19,6 +18,7 @@ dependency 'preparation'
 dependency 'beanstalkd'
 dependency 'bundler'
 dependency 'elasticsearch'
+dependency 'haproxy'
 dependency 'logrotate'
 dependency 'mongodb'
 dependency 'nginx'

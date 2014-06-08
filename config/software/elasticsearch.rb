@@ -1,5 +1,5 @@
 name "elasticsearch"
-version "1.0.1"
+default_version "1.2.1"
 
 dependency "jre"
 dependency "rsync"
@@ -8,7 +8,7 @@ whitelist_file %r{elasticsearch/lib/sigar/.*\.so}
 whitelist_file %r{elasticsearch/lib/sigar/.*\.dylib}
 
 source :url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-#{version}.tar.gz",
-       :md5 => "006e47922154225593525517c01ed740"
+       :md5 => "327fa4ab2a4239972c7ce53832e50c02"
 
 relative_path "elasticsearch-#{version}"
 

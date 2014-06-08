@@ -1,5 +1,5 @@
 name "passenger"
-default_version "4.0.41"
+default_version "4.0.44"
 
 dependency "curl"
 dependency "openssl"

@@ -16,7 +16,7 @@
 #
 
 name "python"
-default_version "2.7.6"
+default_version "2.7.7"
 
 dependency "expat"
 dependency "gdbm"
@@ -27,13 +27,14 @@ dependency "readline"
 dependency "bzip2"
 
 source :url => "http://python.org/ftp/python/#{version}/Python-#{version}.tgz",
-       :md5 => '1d8728eb0dfcac72a0fd99c17ec7f386'
+       :md5 => 'cf842800b67841d64e7fb3cd8acb5663'
 
 relative_path "Python-#{version}"
 
 env = {
   "CFLAGS" => "-I#{install_dir}/embedded/include -I#{install_dir}/embedded/include/readline -O3 -g -pipe",
-  "LDFLAGS" => "-Wl,-rpath,#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib"
+  "LDFLAGS" => "-Wl,-rpath,#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib",
+  "PYTHON_DISABLE_MODULES" => "_bsddb",
 }
 
 build do
@@ -46,9 +47,4 @@ build do
   command "make", :env => env
   command "make install", :env => env
   command "rm -rf #{install_dir}/embedded/lib/python2.7/test"
-
-  # There exists no configure flag to tell Python to not compile readline support :(
-  #block do
-  #  FileUtils.rm_f(Dir.glob("#{install_dir}/embedded/lib/python2.7/lib-dynload/readline.*"))
-  #end
 end
