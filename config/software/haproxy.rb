@@ -1,12 +1,12 @@
 name "haproxy"
-default_version "1.5-dev26"
+default_version "1.5.1"
 
 dependency "pcre"
 dependency "openssl"
 dependency "zlib"
 
 source :url => "http://haproxy.1wt.eu/download/1.5/src/devel/haproxy-#{version}.tar.gz",
-       :md5 => "1da1fbc4d2bdc882bfd1bbd97222b78d"
+       :md5 => "49640cf3ddd793a05fbd3394481a1ed4"
 
 relative_path "haproxy-#{version}"
 

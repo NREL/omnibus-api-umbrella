@@ -25,8 +25,15 @@ dependency "nginx_echo"
 dependency "nginx_headers_more"
 dependency "nginx_x_rid_header"
 
-source :url => "http://nginx.org/download/nginx-#{version}.tar.gz",
-       :md5 => "9659cbb26f226f6390b18ef991a79233"
+version "1.7.1" do
+  source md5: '9659cbb26f226f6390b18ef991a79233'
+end
+
+version "1.7.2" do
+  source md5: '68949a7a0bad4615e9b737fc4e6047f2'
+end
+
+source :url => "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
 

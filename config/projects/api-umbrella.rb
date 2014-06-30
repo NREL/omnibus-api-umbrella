@@ -7,9 +7,20 @@ install_path    '/opt/api-umbrella'
 build_version   Omnibus::BuildVersion.semver
 build_iteration 1
 
-override :nodejs, version: '0.10.28'
-override :ruby, version: '2.1.1'
-override :rubygems, version: '2.2.2'
+override :beanstalkd, version: '1.9'
+override :bundler, version: '1.6.3'
+override :elasticsearch, version: '1.2.1'
+override :haproxy, version: '1.5.1'
+override :mongodb, version: '2.6.3'
+override :nginx, version: '1.7.2'
+override :nodejs, version: '0.10.29'
+override :passenger, version: '4.0.45'
+override :redis, version: '2.8.12'
+override :ruby, version: '2.1.2'
+override :rubygems, version: '2.3.0'
+override :serf, version: '0.6.2'
+override :supervisor, version: '3.0'
+override :varnish, version: '3.0.5'
 
 # creates required build directories
 dependency 'preparation'
