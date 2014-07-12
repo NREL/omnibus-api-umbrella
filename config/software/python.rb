@@ -16,7 +16,7 @@
 #
 
 name "python"
-default_version "2.7.7"
+default_version "2.7.8"
 
 dependency "expat"
 dependency "gdbm"
@@ -26,8 +26,15 @@ dependency "openssl"
 dependency "readline"
 dependency "bzip2"
 
-source :url => "http://python.org/ftp/python/#{version}/Python-#{version}.tgz",
-       :md5 => 'cf842800b67841d64e7fb3cd8acb5663'
+version "2.7.7" do
+  source :md5 => "cf842800b67841d64e7fb3cd8acb5663"
+end
+
+version "2.7.8" do
+  source :md5 => "d4bca0159acb0b44a781292b5231936f"
+end
+
+source :url => "http://python.org/ftp/python/#{version}/Python-#{version}.tgz"
 
 relative_path "Python-#{version}"
 

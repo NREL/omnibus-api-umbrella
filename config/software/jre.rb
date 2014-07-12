@@ -31,7 +31,7 @@ version_major = version_parts[2]
 version_update = version_parts[3]
 version_build = version_parts[4]
 
-if OHAI.kernel['machine'] =~ /x86_64/
+if Ohai['kernel']['machine'] =~ /x86_64/
   # TODO: download x86 version on x86 machines
   source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-#{version_with_update}-linux-x64.tar.gz",
          :md5 => "53a787c9a3170308641074cd86606a99",

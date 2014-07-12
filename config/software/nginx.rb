@@ -16,7 +16,7 @@
 #
 
 name "nginx"
-default_version "1.7.1"
+default_version "1.7.3"
 
 dependency "pcre"
 dependency "openssl"
@@ -31,6 +31,10 @@ end
 
 version "1.7.2" do
   source md5: '68949a7a0bad4615e9b737fc4e6047f2'
+end
+
+version "1.7.3" do
+  source md5: '2b7f37f86e0af9bbb109c4dc225c6247'
 end
 
 source :url => "http://nginx.org/download/nginx-#{version}.tar.gz"
