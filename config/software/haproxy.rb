@@ -13,7 +13,7 @@ version "1.5.2" do
   source md5: 'e854fed32ea751d6db7f366cb910225a'
 end
 
-source :url => "http://haproxy.1wt.eu/download/1.5/src/devel/haproxy-#{version}.tar.gz"
+source :url => "http://www.haproxy.org/download/1.5/src/haproxy-#{version}.tar.gz"
 
 relative_path "haproxy-#{version}"
 

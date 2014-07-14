@@ -1,12 +1,12 @@
 name "varnish"
-default_version "3.0.5"
+default_version "4.0.1"
 
 dependency "pcre"
 dependency "readline"
 dependency "zlib"
 
 source :url => "http://repo.varnish-cache.org/source/varnish-#{version}.tar.gz",
-       :md5 => "674d44775cc927aee4601edb37f60198"
+       :md5 => "53e272f448b2109ab370e03d794a243f"
 
 relative_path "varnish-#{version}"
 

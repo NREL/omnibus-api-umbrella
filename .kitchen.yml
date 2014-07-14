@@ -23,6 +23,7 @@ suites:
   - name: default
     run_list:
       - omnibus::default
+      - python-docutils
     attributes:
       omnibus:
         build_user:  vagrant

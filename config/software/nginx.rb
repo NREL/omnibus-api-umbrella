@@ -20,7 +20,6 @@ default_version "1.7.3"
 
 dependency "pcre"
 dependency "openssl"
-dependency "passenger"
 dependency "nginx_echo"
 dependency "nginx_headers_more"
 dependency "nginx_x_rid_header"
@@ -66,10 +65,9 @@ build do
            "--with-http_stub_status_module",
            "--with-http_gzip_static_module",
            "--with-http_realip_module",
-           "--add-module=#{source_dir}/nginx_echo-v0.53",
+           "--add-module=#{source_dir}/nginx_echo-v0.54",
            "--add-module=#{source_dir}/nginx_headers_more-v0.25",
            "--add-module=#{source_dir}/nginx_x_rid_header-0daa3cc283d91a279a6013734fd78264582fce51",
-           "--add-module=#{install_dir}/embedded/lib/ruby/gems/2.1.0/gems/passenger-4.0.44/ext/nginx",
            "--with-ipv6",
            "--with-debug",
            "--with-ld-opt=\"-L#{install_dir}/embedded/lib -luuid\"",

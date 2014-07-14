@@ -2,7 +2,6 @@ name "elasticsearch"
 default_version "1.2.2"
 
 dependency "jre"
-dependency "rsync"
 
 whitelist_file %r{elasticsearch/lib/sigar/.*\.so}
 whitelist_file %r{elasticsearch/lib/sigar/.*\.dylib}
@@ -24,7 +23,7 @@ env = {
 }
 
 build do
-  command "#{install_dir}/embedded/bin/rsync -a . #{install_dir}/embedded/elasticsearch/"
+  command "rsync -a . #{install_dir}/embedded/elasticsearch/"
   command "ln -sf #{install_dir}/embedded/elasticsearch/bin/elasticsearch #{install_dir}/embedded/bin/elasticsearch"
   command "ln -sf #{install_dir}/embedded/elasticsearch/bin/plugin #{install_dir}/embedded/bin/plugin"
 end

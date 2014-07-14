@@ -33,9 +33,8 @@ version "2.2.2" do
 end
 
 version "2.3.0" do
-  source md5: "f297a3fa7b1f3b693a11183a31668b9b"
+  source md5: "29e89c13f5aa710f7b24c04253359cb0"
 end
-
 
 source url: "http://production.cf.rubygems.org/rubygems/rubygems-#{version}.tgz"
 
