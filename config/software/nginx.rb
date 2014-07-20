@@ -64,6 +64,7 @@ build do
            "--with-http_ssl_module",
            "--with-http_stub_status_module",
            "--with-http_gzip_static_module",
+           "--with-http_gunzip_module",
            "--with-http_realip_module",
            "--add-module=#{source_dir}/nginx_echo-v0.54",
            "--add-module=#{source_dir}/nginx_headers_more-v0.25",
