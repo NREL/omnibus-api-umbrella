@@ -28,9 +28,6 @@ task :outdated do
       :git => "https://github.com/joyent/node.git",
       :constraint => "~> 0.10.29",
     },
-    "passenger" => {
-      :git => "https://github.com/phusion/passenger.git",
-    },
     "redis" => {
       :git => "https://github.com/antirez/redis.git",
     },
