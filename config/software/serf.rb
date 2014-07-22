@@ -1,8 +1,8 @@
 name "serf"
 default_version "0.6.3"
 
-os = OHAI['os']
-arch = if(OHAI['kernel']['machine'] =~ /x86_64/) then "amd64" else "386" end
+os = Ohai['os']
+arch = if(Ohai['kernel']['machine'] =~ /x86_64/) then "amd64" else "386" end
 md5 = case(os)
       when "linux"
         case(arch)
