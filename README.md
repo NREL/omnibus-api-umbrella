@@ -3,6 +3,8 @@ api-umbrella Omnibus project
 This project creates full-stack platform-specific packages for
 `api-umbrella`!
 
+Issues for this project are [maintained here](https://github.com/NREL/api-umbrella/issues).  
+
 Installation
 ------------
 You must have a sane Ruby 1.9+ environment with Bundler installed. Ensure all
