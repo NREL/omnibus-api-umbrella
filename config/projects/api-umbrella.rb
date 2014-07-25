@@ -8,8 +8,8 @@ build_version   Omnibus::BuildVersion.semver
 build_iteration 1
 
 override :beanstalkd, version: '1.9'
-override :bundler, version: '1.6.4'
-override :elasticsearch, version: '1.2.2'
+override :bundler, version: '1.6.5'
+override :elasticsearch, version: '1.3.0'
 override :haproxy, version: '1.5.2'
 override :mongodb, version: '2.6.3'
 override :nginx, version: '1.7.3'
