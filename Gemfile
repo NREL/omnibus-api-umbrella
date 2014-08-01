@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 # Use Berkshelf for resolving cookbook dependencies
-gem 'berkshelf', '~> 3.1.3'
+gem 'berkshelf', '~> 3.1.4'
 
 # Install omnibus software
-gem 'omnibus', '~> 3.1.1'
-gem 'omnibus-software', :github => 'opscode/omnibus-software'
+gem 'omnibus', '~> 3.2.1'
+gem 'omnibus-software', :github => 'opscode/omnibus-software', :branch => 'omnibus/3.2-stable'
 
 # Use Test Kitchen with Vagrant for convering the build environment
 gem 'test-kitchen', '~> 1.2.1'

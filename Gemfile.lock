@@ -1,8 +1,9 @@
 GIT
   remote: git://github.com/opscode/omnibus-software.git
-  revision: 4e68f66e9981f8fe64c0c2a5c0476a6410105fff
+  revision: 66439bc7a895bb78ac7c159e55d5868f940e019c
+  branch: omnibus/3.2-stable
   specs:
-    omnibus-software (0.0.1)
+    omnibus-software (3.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -11,7 +12,7 @@ GEM
     arr-pm (0.0.9)
       cabin (> 0)
     backports (3.6.0)
-    berkshelf (3.1.3)
+    berkshelf (3.1.4)
       addressable (~> 2.3.4)
       berkshelf-api-client (~> 1.2)
       buff-config (~> 1.0)
@@ -28,7 +29,7 @@ GEM
       thor (~> 0.18)
     berkshelf-api-client (1.2.0)
       faraday (~> 0.9.0)
-    buff-config (1.0.0)
+    buff-config (1.0.1)
       buff-extensions (~> 1.0)
       varia_model (~> 0.4)
     buff-extensions (1.0.0)
@@ -37,8 +38,8 @@ GEM
     buff-shell_out (0.1.1)
       buff-ruby_engine (~> 0.1.0)
     cabin (0.6.1)
-    celluloid (0.16.0.pre2)
-      timers (~> 3.0.0)
+    celluloid (0.16.0.pre3)
+      timers (~> 4.0.0)
     celluloid-io (0.16.0.pre2)
       celluloid (>= 0.16.0.pre)
       nio4r (>= 1.0.0)
@@ -54,13 +55,15 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    fpm (1.0.2)
+    ffi-yajl (1.0.1)
+      ffi (~> 1.5)
+      libyajl2 (~> 1.0)
+    fpm (0.4.42)
       arr-pm (~> 0.0.8)
       backports (>= 2.6.2)
       cabin (>= 0.6.0)
       childprocess
       clamp (~> 0.6)
-      ffi
       ftw (~> 0.0.30)
       json (>= 1.7.7)
     ftw (0.0.39)
@@ -75,6 +78,7 @@ GEM
     json (1.8.1)
     kitchen-vagrant (0.15.0)
       test-kitchen (~> 1.0)
+    libyajl2 (1.0.1)
     mime-types (1.25.1)
     minitar (0.5.4)
     mixlib-authentication (1.3.0)
@@ -91,20 +95,22 @@ GEM
     nio4r (1.0.0)
     octokit (3.2.0)
       sawyer (~> 0.5.3)
-    ohai (6.22.0)
+    ohai (7.2.0)
+      ffi (~> 1.9)
+      ffi-yajl (~> 1.0)
       ipaddress
+      mime-types (~> 1.16)
       mixlib-cli
-      mixlib-config
+      mixlib-config (~> 2.0)
       mixlib-log
-      mixlib-shellout
-      systemu (~> 2.5.2)
-      yajl-ruby
-    omnibus (3.1.1)
+      mixlib-shellout (~> 1.2)
+      systemu (~> 2.6.4)
+      wmi-lite (~> 1.0)
+    omnibus (3.2.1)
       chef-sugar (~> 1.2)
-      fpm (~> 1.0.0)
-      mixlib-config (~> 2.1)
-      mixlib-shellout (~> 1.3)
-      ohai (~> 6.12)
+      fpm (~> 0.4)
+      mixlib-shellout (~> 1.4)
+      ohai (~> 7.2)
       thor (~> 0.18)
       uber-s3
     rainbow (2.0.0)
@@ -132,10 +138,10 @@ GEM
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     semverse (1.1.0)
-    solve (1.2.0)
+    solve (1.2.1)
       dep_selector (~> 1.0)
       semverse (~> 1.1)
-    systemu (2.5.2)
+    systemu (2.6.4)
     test-kitchen (1.2.1)
       mixlib-shellout (~> 1.2)
       net-scp (~> 1.1)
@@ -143,22 +149,22 @@ GEM
       safe_yaml (~> 1.0)
       thor (~> 0.18)
     thor (0.19.1)
-    timers (3.0.1)
+    timers (4.0.0)
       hitimes
     uber-s3 (0.2.4)
       mime-types (~> 1.17)
     varia_model (0.4.0)
       buff-extensions (~> 1.0)
       hashie (>= 2.0.2, < 3.0.0)
-    yajl-ruby (1.2.1)
+    wmi-lite (1.0.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  berkshelf (~> 3.1.3)
+  berkshelf (~> 3.1.4)
   kitchen-vagrant (~> 0.15.0)
-  omnibus (~> 3.1.1)
+  omnibus (~> 3.2.1)
   omnibus-software!
   rainbow (~> 2.0.0)
   rake (~> 10.3.2)

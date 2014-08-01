@@ -14,9 +14,6 @@ task :outdated do
     "elasticsearch" => {
       :git => "https://github.com/elasticsearch/elasticsearch.git",
     },
-    "haproxy" => {
-      :git => "http://git.haproxy.org/git/haproxy-1.5.git",
-    },
     "mongodb" => {
       :git => "https://github.com/mongodb/mongo.git",
       :constraint => "~> 2.6.3",
