@@ -22,6 +22,7 @@ dependency "pcre"
 dependency "openssl"
 dependency "nginx_echo"
 dependency "nginx_headers_more"
+dependency "nginx_lua"
 dependency "nginx_x_rid_header"
 
 version "1.7.1" do
@@ -46,6 +47,9 @@ env = {
 
   "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
   "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
+
+  "LUAJIT_LIB" => "#{install_dir}/embedded/lib",
+  "LUAJIT_INC" => "#{install_dir}/embedded/include/luajit-2.0",
 }
 
 build do
@@ -69,6 +73,8 @@ build do
            "--add-module=#{source_dir}/nginx_echo-v0.54",
            "--add-module=#{source_dir}/nginx_headers_more-v0.25",
            "--add-module=#{source_dir}/nginx_x_rid_header-0daa3cc283d91a279a6013734fd78264582fce51",
+           "--add-module=#{source_dir}/nginx_devel_kit-v0.2.19",
+           "--add-module=#{source_dir}/nginx_lua-v0.9.10",
            "--with-ipv6",
            "--with-debug",
            "--with-ld-opt=\"-L#{install_dir}/embedded/lib -luuid\"",

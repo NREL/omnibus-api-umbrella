@@ -7,7 +7,12 @@ cookbook 'apt', '~> 2.0'
 cookbook 'omnibus', '~> 2.2.0'
 
 cookbook 'golang', '~> 1.4.0'
+
+# Dependency for building Varnish 4
 cookbook 'python-docutils', :github => 'NREL-cookbooks/python-docutils'
+
+# Dependency for building Apache Traffic Server
+cookbook 'boost', '~> 0.2.0'
 
 # Uncomment to use the latest version of the Omnibus cookbook from GitHub
 # cookbook 'omnibus', github: 'opscode-cookbooks/omnibus'

@@ -14,12 +14,27 @@ task :outdated do
     "elasticsearch" => {
       :git => "https://github.com/elasticsearch/elasticsearch.git",
     },
+    "luajit" => {
+      :git => "http://luajit.org/git/luajit-2.0.git",
+    },
     "mongodb" => {
       :git => "https://github.com/mongodb/mongo.git",
       :constraint => "~> 2.6.3",
     },
     "nginx" => {
       :git => "https://github.com/nginx/nginx.git",
+    },
+    "nginx_echo" => {
+      :git => "https://github.com/openresty/echo-nginx-module.git",
+    },
+    "nginx_headers_more" => {
+      :git => "https://github.com/openresty/headers-more-nginx-module.git",
+    },
+    "nginx_devel_kit" => {
+      :git => "https://github.com/simpl/ngx_devel_kit.git",
+    },
+    "nginx_lua" => {
+      :git => "https://github.com/openresty/lua-nginx-module.git",
     },
     "nodejs" => {
       :git => "https://github.com/joyent/node.git",
@@ -40,6 +55,9 @@ task :outdated do
     "supervisor" => {
       :git => "https://github.com/Supervisor/supervisor.git",
     },
+    "trafficserver" => {
+      :git => "https://github.com/apache/trafficserver.git",
+    },
     "varnish" => {
       :git => "https://github.com/varnish/Varnish-Cache.git",
     },
@@ -50,7 +68,7 @@ task :outdated do
   versions = {}
   repos.each do |name, options|
     versions[name] = {
-      :current_version => Semverse::Version.new(config.match(/^override :#{name}.*'(.+)'$/)[1]),
+      :current_version => Semverse::Version.new(config.match(/^override :#{name}.*'v?(.+)'$/)[1]),
     }
 
     constraint = Semverse::Constraint.new(options[:constraint])
@@ -75,7 +93,7 @@ task :outdated do
         end
 
         tag.gsub!(/^v/, "")
-        tag.gsub!(/(\d)[\._](beta|rc|pre|alpha|dev)/, '\1-\2')
+        tag.gsub!(/(\d)[\._]?(beta|rc|pre|alpha|dev)/, '\1-\2')
         tag.gsub!(/(\d)([a-z][\d\.]+)$/, '\1-\2')
         tag.gsub!(/(\d+\.\d+\.\d+)\.(\d+)$/, '\1+\2')
         tag.gsub!(/^(\d+\.\d+)-([a-z])/, '\1.0-\2')

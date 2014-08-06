@@ -24,6 +24,7 @@ suites:
     run_list:
       - omnibus::default
       - python-docutils
+      - boost
     attributes:
       omnibus:
         build_user:  vagrant
