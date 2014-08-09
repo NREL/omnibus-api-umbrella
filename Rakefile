@@ -40,6 +40,10 @@ task :outdated do
       :git => "https://github.com/joyent/node.git",
       :constraint => "~> 0.10.29",
     },
+    "openssl" => {
+      :git => "https://github.com/openssl/openssl.git",
+      :string_version => true,
+    },
     "redis" => {
       :git => "https://github.com/antirez/redis.git",
     },
@@ -67,9 +71,14 @@ task :outdated do
 
   versions = {}
   repos.each do |name, options|
+    current_version = config.match(/^override :#{name}.*'v?(.+)'$/)[1]
     versions[name] = {
-      :current_version => Semverse::Version.new(config.match(/^override :#{name}.*'v?(.+)'$/)[1]),
+      :current_version => current_version,
     }
+
+    unless(options[:string_version])
+      versions[name][:current_version] = Semverse::Version.new(current_version)
+    end
 
     constraint = Semverse::Constraint.new(options[:constraint])
 
@@ -90,6 +99,9 @@ task :outdated do
           tag.gsub!(/_/, ".")
         when "varnish"
           tag.gsub!(/^varnish-/, "")
+        when "openssl"
+          tag.gsub!(/^OpenSSL_/i, "")
+          tag.gsub!(/_/, ".")
         end
 
         tag.gsub!(/^v/, "")
@@ -101,28 +113,40 @@ task :outdated do
       end
 
       tags.select! { |tag| tag =~ /^\d+\.\d+/ }
+      case(name)
+      when "openssl"
+        tags.select! { |tag| tag =~ /^\d+\.\d+\.\d+[a-z]?$/ }
+      end
 
       tags.compact!
       tags.uniq!
 
       unparsable = []
       tags.each do |tag|
-        begin
-          available_version = Semverse::Version.new(tag)
-
-          next if(available_version.pre_release?)
-
+        if(options[:string_version])
+          available_version = tag
           if(!versions[name][:latest_version] || available_version > versions[name][:latest_version])
             versions[name][:latest_version] = available_version
+            versions[name][:wanted_version] = available_version
           end
+        else
+          begin
+            available_version = Semverse::Version.new(tag)
 
-          if(constraint.satisfies?(available_version))
-            if(!versions[name][:wanted_version] || available_version > versions[name][:wanted_version])
-              versions[name][:wanted_version] = available_version
+            next if(available_version.pre_release?)
+
+            if(!versions[name][:latest_version] || available_version > versions[name][:latest_version])
+              versions[name][:latest_version] = available_version
             end
+
+            if(constraint.satisfies?(available_version))
+              if(!versions[name][:wanted_version] || available_version > versions[name][:wanted_version])
+                versions[name][:wanted_version] = available_version
+              end
+            end
+          rescue Semverse::InvalidVersionFormat => e
+            unparsable << tag
           end
-        rescue Semverse::InvalidVersionFormat => e
-          unparsable << tag
         end
       end
 
