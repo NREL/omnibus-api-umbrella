@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/opscode/omnibus-software.git
-  revision: 66439bc7a895bb78ac7c159e55d5868f940e019c
+  revision: 376a3c994d8a019a1d21ce2bff7f7885c4f7cdd0
   branch: omnibus/3.2-stable
   specs:
     omnibus-software (3.0.0)
@@ -35,7 +35,7 @@ GEM
     buff-extensions (1.0.0)
     buff-ignore (1.1.1)
     buff-ruby_engine (0.1.0)
-    buff-shell_out (0.1.1)
+    buff-shell_out (0.2.0)
       buff-ruby_engine (~> 0.1.0)
     cabin (0.6.1)
     celluloid (0.16.0.pre3)
@@ -55,7 +55,7 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    ffi-yajl (1.0.1)
+    ffi-yajl (1.0.2)
       ffi (~> 1.5)
       libyajl2 (~> 1.0)
     fpm (0.4.42)
@@ -93,7 +93,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
     nio4r (1.0.0)
-    octokit (3.2.0)
+    octokit (3.3.0)
       sawyer (~> 0.5.3)
     ohai (7.2.0)
       ffi (~> 1.9)
