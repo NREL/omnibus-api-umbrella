@@ -1,13 +1,13 @@
 name "mongodb"
-default_version "2.6.3"
+default_version "2.6.4"
 
 if Ohai['kernel']['machine'] =~ /x86_64/
   source :url => "http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-#{version}.tgz",
-         :md5 => "9b3db9b6d889e6bc0d6e3bfe4316a85a"
+         :md5 => "484f07082803e21691ece39fa9e1292b"
   relative_path "mongodb-linux-x86_64-#{version}"
 else
   source :url => "http://fastdl.mongodb.org/linux/mongodb-linux-i686-#{version}.tgz",
-         :md5 => "a82ff1787472399178589df5d8d45c81"
+         :md5 => "99baf442a3fa6bfa58f01a750155713f"
   relative_path "mongodb-linux-i686-#{version}"
 end
 
