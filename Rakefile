@@ -59,6 +59,12 @@ task :outdated do
     "supervisor" => {
       :git => "https://github.com/Supervisor/supervisor.git",
     },
+    "supervisor_mrlaforge" => {
+      :git => "https://github.com/fschulze/mr.laforge.git",
+    },
+    "supervisor_serialrestart" => {
+      :git => "https://github.com/native2k/supervisor-serialrestart.git",
+    },
     "trafficserver" => {
       :git => "https://github.com/apache/trafficserver.git",
     },
@@ -158,14 +164,14 @@ task :outdated do
 
   puts "\n\n"
 
-  print Rainbow("Package".ljust(20)).underline
+  print Rainbow("Package".ljust(24)).underline
   print Rainbow("Current".rjust(16)).underline
   print Rainbow("Wanted".rjust(16)).underline
   print Rainbow("Latest".rjust(16)).underline
   puts ""
 
   versions.each do |name, info|
-    name_column = name.ljust(20)
+    name_column = name.ljust(24)
     if(info[:wanted_version] != info[:current_version])
       print Rainbow(name_column).red
     elsif(info[:current_version] != info[:latest_version])
