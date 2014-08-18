@@ -16,7 +16,7 @@
 #
 
 name "jre"
-default_version "7u65-b17"
+default_version "7u67-b01"
 
 dependency "rsync"
 
@@ -34,12 +34,12 @@ version_build = version_parts[4]
 if Ohai['kernel']['machine'] =~ /x86_64/
   # TODO: download x86 version on x86 machines
   source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-#{version_with_update}-linux-x64.tar.gz",
-         :md5 => "2f5c128568f697e918c5259d7bcf2fae",
+         :md5 => "9007c79167be0177fb47e5313c53d5cb",
          :cookie => "s_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre#{version_major}-downloads-1880261.html;",
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
 else
   source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-#{version_with_update}-linux-i586.tar.gz",
-         :md5 => "d11d9f4488d75106fc8909b847efaeda",
+         :md5 => "2a256eb2a91f0084e58c612636342c2b",
          :cookie => "s_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre#{version_major}7-downloads-1880261.html;",
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
 end

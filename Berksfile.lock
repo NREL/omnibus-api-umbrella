@@ -2,23 +2,26 @@ DEPENDENCIES
   apt (~> 2.0)
   boost (~> 0.2.0)
   golang (~> 1.4.0)
-  omnibus (~> 2.2.0)
+  omnibus (~> 2.3.0)
   python-docutils
     git: git://github.com/NREL-cookbooks/python-docutils.git
     revision: 65238c77e9729cdce238004ffee73ecdd2251121
+  vagrant_extras
+    git: git://github.com/NREL-cookbooks/vagrant_extras.git
+    revision: 36f43d66fa52edd8e7ba297dfd55eecda88aa685
 
 GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
-  apt (2.4.0)
+  apt (2.5.2)
   boost (0.2.0)
     build-essential (>= 0.0.0)
-  build-essential (2.0.4)
+  build-essential (2.0.6)
   chef-sugar (2.0.0)
   chef_handler (1.1.6)
   golang (1.4.0)
   homebrew (1.9.0)
-  omnibus (2.2.0)
+  omnibus (2.3.0)
     7-zip (~> 1.0)
     build-essential (~> 2.0)
     chef-sugar (~> 2.0)
@@ -30,7 +33,10 @@ GRAPH
     yum-epel (>= 0.0.0)
   python-docutils (0.1.0)
     python (>= 0.0.0)
-  windows (1.33.1)
+  sudo (2.7.0)
+  vagrant_extras (0.2.2)
+    sudo (>= 0.0.0)
+  windows (1.34.2)
     chef_handler (>= 0.0.0)
   wix (1.1.0)
     windows (>= 1.2.2)

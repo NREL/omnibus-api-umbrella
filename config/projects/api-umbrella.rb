@@ -46,6 +46,9 @@ dependency 'rubygems'
 dependency 'supervisor'
 dependency 'varnish'
 
+dependency 'api-umbrella-router'
+dependency 'api-umbrella-web'
+
 # version manifest file
 dependency 'version-manifest'
 

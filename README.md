@@ -88,7 +88,7 @@ $ bin/kitchen login ubuntu-12.04
 [vagrant@ubuntu...] $ cd api-umbrella
 [vagrant@ubuntu...] $ bundle install
 [vagrant@ubuntu...] $ ...
-[vagrant@ubuntu...] $ bin/omnibus build api-umbrella
+[vagrant@ubuntu...] $ bin/omnibus build api-umbrella -l info
 ```
 
 For a complete list of all commands and platforms, run `kitchen list` or

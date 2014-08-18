@@ -25,6 +25,7 @@ suites:
       - omnibus::default
       - python-docutils
       - boost
+      - vagrant_extras::passwordless_internal_ssh
     attributes:
       omnibus:
         build_user:  vagrant

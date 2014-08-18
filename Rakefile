@@ -1,5 +1,6 @@
 # A task for trying to find outdated software versions based on what's being
 # built versus what's available.
+desc "Find outdated software dependencies"
 task :outdated do
   require "semverse"
   require "rainbow"

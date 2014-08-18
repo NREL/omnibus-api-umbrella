@@ -4,7 +4,7 @@ source 'https://api.berkshelf.com'
 # systems, since the cache can become stale on older boxes.
 cookbook 'apt', '~> 2.0'
 
-cookbook 'omnibus', '~> 2.2.0'
+cookbook 'omnibus', '~> 2.3.0'
 
 cookbook 'golang', '~> 1.4.0'
 
@@ -14,5 +14,5 @@ cookbook 'python-docutils', :github => 'NREL-cookbooks/python-docutils'
 # Dependency for building Apache Traffic Server
 cookbook 'boost', '~> 0.2.0'
 
-# Uncomment to use the latest version of the Omnibus cookbook from GitHub
-# cookbook 'omnibus', github: 'opscode-cookbooks/omnibus'
+# To setup internal SSH keys for internal Capistrano deployments.
+cookbook 'vagrant_extras', :github => 'NREL-cookbooks/vagrant_extras'
