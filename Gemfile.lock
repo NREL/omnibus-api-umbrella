@@ -95,7 +95,7 @@ GEM
     nio4r (1.0.0)
     octokit (3.3.0)
       sawyer (~> 0.5.3)
-    ohai (7.2.0)
+    ohai (7.2.2)
       ffi (~> 1.9)
       ffi-yajl (~> 1.0)
       ipaddress
@@ -134,7 +134,7 @@ GEM
       semverse (~> 1.1)
       varia_model (~> 0.4)
     safe_yaml (1.0.3)
-    sawyer (0.5.4)
+    sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     semverse (1.1.0)
