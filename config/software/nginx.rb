@@ -23,7 +23,7 @@ dependency "openssl"
 dependency "nginx_echo"
 dependency "nginx_headers_more"
 dependency "nginx_lua"
-dependency "nginx_x_rid_header"
+dependency "nginx_txid"
 
 version "1.7.1" do
   source md5: '9659cbb26f226f6390b18ef991a79233'
@@ -76,7 +76,7 @@ build do
            "--with-http_realip_module",
            "--add-module=#{source_dir}/nginx_echo-v0.56",
            "--add-module=#{source_dir}/nginx_headers_more-v0.25",
-           "--add-module=#{source_dir}/nginx_x_rid_header-0daa3cc283d91a279a6013734fd78264582fce51",
+           "--add-module=#{source_dir}/nginx_txid-e7df6b153f394bb2d95dbe368d1b86eb7a85ad4f",
            "--add-module=#{source_dir}/nginx_devel_kit-v0.2.19",
            "--add-module=#{source_dir}/nginx_lua-v0.9.12",
            "--with-ipv6",
