@@ -8,7 +8,7 @@ build_version   Omnibus::BuildVersion.semver
 build_iteration 1
 
 override :beanstalkd, version: '1.10'
-override :bundler, version: '1.6.5'
+override :bundler, version: '1.7.2'
 override :elasticsearch, version: '1.3.2'
 override :luajit, version: '2.0.3'
 override :mongodb, version: '2.6.4'
@@ -47,6 +47,7 @@ dependency 'supervisor'
 dependency 'varnish'
 
 dependency 'api-umbrella-router'
+dependency 'api-umbrella-static-site'
 dependency 'api-umbrella-web'
 
 # version manifest file
