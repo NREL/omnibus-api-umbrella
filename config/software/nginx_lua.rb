@@ -1,5 +1,5 @@
 name "nginx_lua"
-default_version "v0.9.10"
+default_version "v0.9.12"
 
 dependency "luajit"
 dependency "nginx_devel_kit"
