@@ -18,8 +18,6 @@
 name "jre"
 default_version "7u67-b01"
 
-dependency "rsync"
-
 whitelist_file "jre/bin/javaws"
 whitelist_file "jre/bin/policytool"
 whitelist_file "jre/lib"
@@ -50,5 +48,5 @@ jre_dir = "#{install_dir}/embedded/jre"
 
 build do
   command "mkdir -p #{jre_dir}"
-  command "#{install_dir}/embedded/bin/rsync -a . #{jre_dir}/"
+  command "rsync -a . #{jre_dir}/"
 end

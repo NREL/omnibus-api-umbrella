@@ -1,5 +1,5 @@
 name "api-umbrella-static-site"
-default_version "config"
+default_version "master"
 
 source :git => "https://github.com/NREL/api-umbrella-static-site.git"
 relative_path "api-umbrella-static-site"

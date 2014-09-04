@@ -81,7 +81,6 @@ build do
            "--add-module=#{source_dir}/nginx_lua-v0.9.12",
            "--with-ipv6",
            "--with-debug",
-           "--with-ld-opt=\"-L#{install_dir}/embedded/lib -luuid\"",
            "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\""].join(" "),
           :env => env
   command "make -j #{max_build_jobs}", :env => env

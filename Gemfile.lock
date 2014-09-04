@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/opscode/omnibus-software.git
-  revision: 376a3c994d8a019a1d21ce2bff7f7885c4f7cdd0
+  revision: 3a69fdd93985934362bced445924089156907297
   branch: omnibus/3.2-stable
   specs:
     omnibus-software (3.0.0)
@@ -55,7 +55,7 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    ffi-yajl (1.0.2)
+    ffi-yajl (1.1.0)
       ffi (~> 1.5)
       libyajl2 (~> 1.0)
     fpm (0.4.42)
@@ -92,10 +92,10 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
-    nio4r (1.0.0)
-    octokit (3.3.0)
+    nio4r (1.0.1)
+    octokit (3.3.1)
       sawyer (~> 0.5.3)
-    ohai (7.2.2)
+    ohai (7.2.4)
       ffi (~> 1.9)
       ffi-yajl (~> 1.0)
       ipaddress
@@ -137,7 +137,7 @@ GEM
     sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
-    semverse (1.1.0)
+    semverse (1.2.1)
     solve (1.2.1)
       dep_selector (~> 1.0)
       semverse (~> 1.1)
@@ -168,5 +168,5 @@ DEPENDENCIES
   omnibus-software!
   rainbow (~> 2.0.0)
   rake (~> 10.3.2)
-  semverse (~> 1.1.0)
+  semverse (~> 1.2.1)
   test-kitchen (~> 1.2.1)
