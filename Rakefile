@@ -36,6 +36,11 @@ task :outdated do
     },
     "nginx_lua" => {
       :git => "https://github.com/openresty/lua-nginx-module.git",
+      :git_ref => "master",
+    },
+    "nginx_txid" => {
+      :git => "https://github.com/streadway/ngx_txid.git",
+      :git_ref => "master",
     },
     "nodejs" => {
       :git => "https://github.com/joyent/node.git",
@@ -78,18 +83,36 @@ task :outdated do
 
   versions = {}
   repos.each do |name, options|
-    current_version = config.match(/^override :#{name}.*'v?(.+)'$/)[1]
+    current_version_string = config.match(/^override :#{name}.*'(v?.+)'$/)[1]
+    current_version = current_version_string.gsub(/^v/, "")
     versions[name] = {
       :current_version => current_version,
     }
 
-    unless(options[:string_version])
+    unless(options[:string_version] || options[:git_ref])
       versions[name][:current_version] = Semverse::Version.new(current_version)
     end
 
     constraint = Semverse::Constraint.new(options[:constraint])
 
-    if(options[:git])
+    if(options[:git] && options[:git_ref])
+      current_commit = current_version_string
+      if(current_commit !~ /^[0-9a-f]{5,40}$/)
+        current_commit = `git ls-remote #{options[:git]} #{current_version_string}`.split(/\s/).first
+        if(current_commit.empty?)
+          puts "#{name}: Could not parse version #{current_version_string}"
+        end
+      end
+
+      latest_commit = `git ls-remote #{options[:git]} #{options[:git_ref]}`.split(/\s/).first
+      if(latest_commit.empty?)
+        puts "#{name}: Could not parse latest commit: git ls-remote #{options[:git]} #{options[:git_ref]}"
+      end
+
+      versions[name][:current_version] = current_commit[0,7]
+      versions[name][:latest_version] = latest_commit[0,7]
+      versions[name][:wanted_version] = latest_commit[0,7]
+    elsif(options[:git])
       raw_tags = `git ls-remote --tags #{options[:git]}`
       tags = raw_tags.lines.map do |line|
         tag = line.match(%r{refs/tags/(.+)$})[1]

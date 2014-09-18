@@ -41,6 +41,10 @@ version "1.7.4" do
   source md5: 'bfc256cf72123601af56501b0a6a41f5'
 end
 
+version "1.7.5" do
+  source md5: 'e65aad627acc1cbe26527339a5814d57'
+end
+
 source :url => "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
@@ -57,32 +61,43 @@ env = {
 }
 
 build do
-  command ["./configure",
-           "--prefix=#{install_dir}/embedded",
-           "--conf-path=#{install_dir}/embedded/etc/nginx/nginx.conf",
-           "--pid-path=#{install_dir}/embedded/var/run/nginx.pid",
-           "--lock-path=#{install_dir}/embedded/var/lock/subsys/nginx",
-           "--error-log-path=#{install_dir}/embedded/var/log/nginx/error.log",
-           "--http-log-path=#{install_dir}/embedded/var/log/nginx/access.log",
-           "--http-client-body-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/client_body",
-           "--http-proxy-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/proxy",
-           "--http-fastcgi-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/fastcgi",
-           "--http-uwsgi-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/uwsgi",
-           "--http-scgi-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/scgi",
-           "--with-http_ssl_module",
-           "--with-http_stub_status_module",
-           "--with-http_gzip_static_module",
-           "--with-http_gunzip_module",
-           "--with-http_realip_module",
-           "--add-module=#{source_dir}/nginx_echo-v0.56",
-           "--add-module=#{source_dir}/nginx_headers_more-v0.25",
-           "--add-module=#{source_dir}/nginx_txid-e7df6b153f394bb2d95dbe368d1b86eb7a85ad4f",
-           "--add-module=#{source_dir}/nginx_devel_kit-v0.2.19",
-           "--add-module=#{source_dir}/nginx_lua-v0.9.12",
-           "--with-ipv6",
-           "--with-debug",
-           "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\""].join(" "),
-          :env => env
+  command [
+    # Use the versioned path when including nginx modules, so we can more
+    # easily tell which versions of modules were compiled in when running
+    # `nginx -V`.
+    "export NGINX_MODULE_ECHO_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_echo`",
+    "export NGINX_MODULE_HEADERS_MORE_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_headers_more`",
+    "export NGINX_MODULE_TXID_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_txid`",
+    "export NGINX_MODULE_DEVEL_KIT_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_devel_kit`",
+    "export NGINX_MODULE_LUA_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_lua`",
+    [
+      "./configure",
+      "--prefix=#{install_dir}/embedded",
+      "--conf-path=#{install_dir}/embedded/etc/nginx/nginx.conf",
+      "--pid-path=#{install_dir}/embedded/var/run/nginx.pid",
+      "--lock-path=#{install_dir}/embedded/var/lock/subsys/nginx",
+      "--error-log-path=#{install_dir}/embedded/var/log/nginx/error.log",
+      "--http-log-path=#{install_dir}/embedded/var/log/nginx/access.log",
+      "--http-client-body-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/client_body",
+      "--http-proxy-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/proxy",
+      "--http-fastcgi-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/fastcgi",
+      "--http-uwsgi-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/uwsgi",
+      "--http-scgi-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/scgi",
+      "--with-http_ssl_module",
+      "--with-http_stub_status_module",
+      "--with-http_gzip_static_module",
+      "--with-http_gunzip_module",
+      "--with-http_realip_module",
+      "--add-module=$NGINX_MODULE_ECHO_VERSIONED_PATH",
+      "--add-module=$NGINX_MODULE_HEADERS_MORE_VERSIONED_PATH",
+      "--add-module=$NGINX_MODULE_TXID_VERSIONED_PATH",
+      "--add-module=$NGINX_MODULE_DEVEL_KIT_VERSIONED_PATH",
+      "--add-module=$NGINX_MODULE_LUA_VERSIONED_PATH",
+      "--with-ipv6",
+      "--with-debug",
+      "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\""
+    ].join(" "),
+  ].join(" && "), :env => env
   command "make -j #{max_build_jobs}", :env => env
   command "make install"
   command "mkdir -p #{install_dir}/var/lib/nginx/tmp"
