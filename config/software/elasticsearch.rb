@@ -30,10 +30,6 @@ source :url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/e
 
 relative_path "elasticsearch-#{version}"
 
-env = {
-  "JAVA_HOME" => "#{install_dir}/embedded/jre"
-}
-
 build do
   command "rsync -a . #{install_dir}/embedded/elasticsearch/"
   command "ln -sf #{install_dir}/embedded/elasticsearch/bin/elasticsearch #{install_dir}/embedded/bin/elasticsearch"

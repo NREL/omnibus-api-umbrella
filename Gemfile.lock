@@ -11,7 +11,7 @@ GEM
     addressable (2.3.6)
     arr-pm (0.0.9)
       cabin (> 0)
-    backports (3.6.0)
+    backports (3.6.1)
     berkshelf (3.1.5)
       addressable (~> 2.3.4)
       berkshelf-api-client (~> 1.2)

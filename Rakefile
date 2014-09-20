@@ -15,6 +15,17 @@ task :outdated do
     "elasticsearch" => {
       :git => "https://github.com/elasticsearch/elasticsearch.git",
     },
+    "elasticsearch_bigdesk" => {
+      :git => "https://github.com/lukas-vlcek/bigdesk.git",
+    },
+    "elasticsearch_head" => {
+      :git => "https://github.com/mobz/elasticsearch-head.git",
+      :git_ref => "master",
+    },
+    "elasticsearch_hq" => {
+      :git => "https://github.com/royrusso/elasticsearch-HQ.git",
+      :git_ref => "master",
+    },
     "luajit" => {
       :git => "http://luajit.org/git/luajit-2.0.git",
     },
