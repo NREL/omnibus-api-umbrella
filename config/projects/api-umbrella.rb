@@ -51,6 +51,8 @@ dependency 'redis'
 dependency 'ruby'
 dependency 'rubygems'
 dependency 'supervisor'
+dependency 'supervisor_mrlaforge'
+dependency 'supervisor_serialrestart'
 dependency 'varnish'
 
 dependency 'api-umbrella-router'

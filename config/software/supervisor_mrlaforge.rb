@@ -2,6 +2,7 @@ name "mr.laforge"
 default_version "0.6"
 
 dependency "pip"
+dependency "supervisor"
 
 env = with_standard_compiler_flags(with_embedded_path)
 
