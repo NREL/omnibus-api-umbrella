@@ -4,6 +4,44 @@
 # after package is uninstalled.
 #
 
+PROGNAME=$(basename $0)
+
+function error_exit
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+
+cleanup() {
+  if [ command -v chkconfig > /dev/null 2>&1 ]; then
+    chkconfig --del api-umbrella || error_exit "Cannot disable api-umbrella service"
+  elif [ command -v update-rc.d > /dev/null 2>&1 ]; then
+    update-rc.d api-umbrella remove || error_exit "Cannot disable api-umbrella service"
+  else
+    error_exit "No supported init tool found."
+  fi
+
+  rm -f /usr/bin/api-umbrella
+  rm -f /etc/init.d/api-umbrella
+}
+
+# On RedHat RPM systems, when an upgrade is performed, the old package is
+# removed after the newer one is installed. Only perform cleanup on full
+# removals.
+#
+# See: http://tickets.opscode.com/browse/CHEF-3022
+if [ ! -f /etc/redhat-release -a ! -f /etc/fedora-release -a ! -f /etc/system-release ]; then
+  # Non-RPM system: Go ahead with removal
+  cleanup
+elif [ $1 -eq 0 ]; then
+  # RPM system: Uninstalling (not upgrading)
+  cleanup
+elif [ $1 -ge 1 ]; then
+  # RPM system: Upgrading (not uninstalling)
+  /etc/init.d/api-umbrella status || exit 0
+  /etc/init.d/api-umbrella restart || error_exit "Cannot start api-umbrella service"
+fi
+
 echo "api-umbrella has been uninstalled!"
 
 exit 0

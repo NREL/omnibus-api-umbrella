@@ -12,7 +12,27 @@ function error_exit
   exit 1
 }
 
-chmod 1777 /opt/api-umbrella/var/lib/nginx/tmp
+adduser --system --quiet --group --no-create-home api-umbrella
+adduser --system --quiet --group --no-create-home api-umbrella-deploy
+
+mkdir -p /opt/api-umbrella/var/tmp
+chmod 1777 /opt/api-umbrella/var/tmp
+
+chown api-umbrella:api-umbrella /opt/api-umbrella/etc /opt/api-umbrella/var
+chown -R api-umbrella-deploy:api-umbrella-deploy /opt/api-umbrella/embedded/apps
+
+ln -sf /opt/api-umbrella/bin/api-umbrella /usr/bin/api-umbrella || error_exit "Cannot link api-umbrella to /usr/bin"
+ln -sf /opt/api-umbrella/etc/init.d/api-umbrella /etc/init.d/api-umbrella || error_exit "Cannot link api-umbrella to /etc/init.d"
+
+if [ command -v chkconfig > /dev/null 2>&1 ]; then
+  chkconfig --add api-umbrella || error_exit "Cannot enable api-umbrella service"
+elif [ command -v update-rc.d > /dev/null 2>&1 ]; then
+  update-rc.d api-umbrella defaults 85 15 || error_exit "Cannot enable api-umbrella service"
+else
+  error_exit "No supported init tool found."
+fi
+
+/etc/init.d/api-umbrella start || error_exit "Cannot start api-umbrella service"
 
 echo "Thank you for installing api-umbrella!"
 

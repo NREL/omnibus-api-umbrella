@@ -13,5 +13,8 @@ build do
   command "bundle exec cap omnibus deploy", :env => env
 
   # Install the main api umbrella binary that comes from the router.
-  command "ln -s #{install_dir}/embedded/apps/router/current/bin/api-umbrella-ctl #{install_dir}/bin/api-umbrella-ctl", :env => env
+  command "ln -s #{install_dir}/embedded/apps/router/current/bin/api-umbrella #{install_dir}/bin/api-umbrella", :env => env
+
+  # Install default config files and scripts.
+  command "rsync -av #{Omnibus.project_root}/files/ #{install_dir}/"
 end

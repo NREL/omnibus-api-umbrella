@@ -12,4 +12,21 @@ function error_exit
   exit 1
 }
 
+cleanup() {
+  /etc/init.d/api-umbrella stop
+}
+
+# On RedHat RPM systems, when an upgrade is performed, the old package is
+# removed after the newer one is installed. Only perform cleanup on full
+# removals.
+#
+# See: http://tickets.opscode.com/browse/CHEF-3022
+if [ ! -f /etc/redhat-release -a ! -f /etc/fedora-release -a ! -f /etc/system-release ]; then
+  # Non-RPM system: Go ahead with removal
+  cleanup
+elif [ $1 -eq 0 ]; then
+  # RPM system: Uninstalling (not upgrading)
+  cleanup
+fi
+
 exit 0

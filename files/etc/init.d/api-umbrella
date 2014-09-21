@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+# api-umbrella
+#
+# chkconfig: - 85 15
+# description: API Umbrella
+# processname: api-umbrella
+# config: /etc/api-umbrella/api-umbrella.yml
+
+NAME=api-umbrella
+LOCKFILE=/var/lock/subsys/$NAME
+
+start() {
+  api-umbrella start
+  RETVAL=$?
+  [ $RETVAL -eq 0 ] && touch $LOCKFILE
+  return $RETVAL
+} 
+
+stop() {
+  api-umbrella stop
+  RETVAL=$?
+  [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
+  return $RETVAL
+}
+
+restart() {
+  api-umbrella restart
+  RETVAL=$?
+  return $RETVAL
+}
+
+reload() {
+  api-umbrella reload
+  RETVAL=$?
+  return $RETVAL
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  restart)
+    restart
+    ;;
+  reload)
+    reload
+    ;;
+  condrestart)
+    [ -f $LOCKFILE ] && restart || :
+    ;;
+  *)
+    echo "Usage: $NAME {start|stop|status|reload|restart|condrestart}"
+    exit 1
+    ;;
+esac
+exit $?
