@@ -4,21 +4,16 @@
 # after package is uninstalled.
 #
 
-PROGNAME=$(basename $0)
-
-function error_exit
-{
-  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+function error_exit {
+  echo "api-umbrella: ${1:-"Unknown Error"}" 1>&2
   exit 1
 }
 
-cleanup() {
-  if [ command -v chkconfig > /dev/null 2>&1 ]; then
-    chkconfig --del api-umbrella || error_exit "Cannot disable api-umbrella service"
-  elif [ command -v update-rc.d > /dev/null 2>&1 ]; then
-    update-rc.d api-umbrella remove || error_exit "Cannot disable api-umbrella service"
-  else
-    error_exit "No supported init tool found."
+function remove_service {
+  if command -v chkconfig > /dev/null 2>&1; then
+    chkconfig --del api-umbrella > /dev/null 2>&1
+  elif command -v update-rc.d > /dev/null 2>&1; then
+    update-rc.d api-umbrella remove > /dev/null 2>&1
   fi
 
   rm -f /usr/bin/api-umbrella
@@ -32,16 +27,15 @@ cleanup() {
 # See: http://tickets.opscode.com/browse/CHEF-3022
 if [ ! -f /etc/redhat-release -a ! -f /etc/fedora-release -a ! -f /etc/system-release ]; then
   # Non-RPM system: Go ahead with removal
-  cleanup
-elif [ $1 -eq 0 ]; then
+  remove_service
+elif [ "$1" -eq "0" ]; then
   # RPM system: Uninstalling (not upgrading)
-  cleanup
-elif [ $1 -ge 1 ]; then
+  remove_service
+elif [ "$1" -eq "1" ]; then
   # RPM system: Upgrading (not uninstalling)
-  /etc/init.d/api-umbrella status || exit 0
-  /etc/init.d/api-umbrella restart || error_exit "Cannot start api-umbrella service"
+  # Restart, but only if started.
+  /etc/init.d/api-umbrella status > /dev/null 2>&1 || exit 0
+  /etc/init.d/api-umbrella restart > /dev/null 2>&1 || error_exit "Cannot restart api-umbrella service"
 fi
-
-echo "api-umbrella has been uninstalled!"
 
 exit 0

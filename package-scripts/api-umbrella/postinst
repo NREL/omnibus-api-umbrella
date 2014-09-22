@@ -4,36 +4,46 @@
 # after package is installed.
 #
 
-PROGNAME=$(basename $0)
-
-function error_exit
-{
-  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+function error_exit {
+  echo "api-umbrella: ${1:-"Unknown Error"}" 1>&2
   exit 1
 }
 
-adduser --system --quiet --group --no-create-home api-umbrella
-adduser --system --quiet --group --no-create-home api-umbrella-deploy
+USER=api-umbrella
+GROUP=api-umbrella
+DEPLOY_USER=api-umbrella-deploy
+DEPLOY_GROUP=api-umbrella-deploy
 
+getent group $GROUP > /dev/null || groupadd -r $GROUP
+getent passwd $USER > /dev/null || \
+  useradd -r -g $GROUP -s /sbin/nologin \
+    -d /opt/api-umbrella -c "API Umbrella user" $USER
+
+getent group $DEPLOY_GROUP > /dev/null || groupadd -r $DEPLOY_GROUP
+getent passwd $DEPLOY_USER > /dev/null || \
+  useradd -r -g $DEPLOY_GROUP -s /sbin/nologin \
+    -d /opt/api-umbrella/embedded/apps -c "API Umbrella deployment user" $DEPLOY_USER
+
+mkdir -p /opt/api-umbrella/etc
+mkdir -p /opt/api-umbrella/var/db
+mkdir -p /opt/api-umbrella/var/log
+mkdir -p /opt/api-umbrella/var/run
 mkdir -p /opt/api-umbrella/var/tmp
 chmod 1777 /opt/api-umbrella/var/tmp
 
-chown api-umbrella:api-umbrella /opt/api-umbrella/etc /opt/api-umbrella/var
+chown -R api-umbrella:api-umbrella /opt/api-umbrella/etc /opt/api-umbrella/var
 chown -R api-umbrella-deploy:api-umbrella-deploy /opt/api-umbrella/embedded/apps
 
 ln -sf /opt/api-umbrella/bin/api-umbrella /usr/bin/api-umbrella || error_exit "Cannot link api-umbrella to /usr/bin"
-ln -sf /opt/api-umbrella/etc/init.d/api-umbrella /etc/init.d/api-umbrella || error_exit "Cannot link api-umbrella to /etc/init.d"
+cp /opt/api-umbrella/etc/init.d/api-umbrella /etc/init.d/api-umbrella || error_exit "Cannot copy api-umbrella to /etc/init.d"
 
-if [ command -v chkconfig > /dev/null 2>&1 ]; then
+# Install service, but don't activate.
+if command -v chkconfig > /dev/null 2>&1; then
   chkconfig --add api-umbrella || error_exit "Cannot enable api-umbrella service"
-elif [ command -v update-rc.d > /dev/null 2>&1 ]; then
+elif command -v update-rc.d > /dev/null 2>&1; then
   update-rc.d api-umbrella defaults 85 15 || error_exit "Cannot enable api-umbrella service"
 else
   error_exit "No supported init tool found."
 fi
-
-/etc/init.d/api-umbrella start || error_exit "Cannot start api-umbrella service"
-
-echo "Thank you for installing api-umbrella!"
 
 exit 0
