@@ -1,5 +1,5 @@
 name "api-umbrella-web"
-default_version "admin-permissions"
+default_version "master"
 
 source :git => "https://github.com/NREL/api-umbrella-web.git"
 relative_path "api-umbrella-web"

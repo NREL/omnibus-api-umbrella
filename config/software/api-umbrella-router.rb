@@ -1,5 +1,5 @@
 name "api-umbrella-router"
-default_version "config"
+default_version "master"
 
 source :git => "https://github.com/NREL/api-umbrella-router.git"
 relative_path "api-umbrella-router"
