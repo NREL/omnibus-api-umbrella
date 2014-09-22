@@ -36,6 +36,12 @@ reload() {
   return $RETVAL
 }
 
+status() {
+  api-umbrella status
+  RETVAL=$?
+  return $RETVAL
+}
+
 case "$1" in
   start)
     start
