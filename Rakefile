@@ -82,9 +82,6 @@ task :outdated do
     "supervisor_serialrestart" => {
       :git => "https://github.com/native2k/supervisor-serialrestart.git",
     },
-    "trafficserver" => {
-      :git => "https://github.com/apache/trafficserver.git",
-    },
     "varnish" => {
       :git => "https://github.com/varnish/Varnish-Cache.git",
     },
