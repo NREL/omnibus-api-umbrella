@@ -34,6 +34,7 @@ chmod 1777 /opt/api-umbrella/var/tmp
 chown -R api-umbrella:api-umbrella /opt/api-umbrella/etc /opt/api-umbrella/var
 chown -R api-umbrella-deploy:api-umbrella-deploy /opt/api-umbrella/embedded/apps
 
+mkdir -p /etc/api-umbrella
 ln -sf /opt/api-umbrella/bin/api-umbrella /usr/bin/api-umbrella || error_exit "Cannot link api-umbrella to /usr/bin"
 cp /opt/api-umbrella/etc/init.d/api-umbrella /etc/init.d/api-umbrella || error_exit "Cannot copy api-umbrella to /etc/init.d"
 

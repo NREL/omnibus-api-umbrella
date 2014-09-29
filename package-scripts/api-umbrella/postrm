@@ -18,6 +18,7 @@ function remove_service {
 
   rm -f /usr/bin/api-umbrella
   rm -f /etc/init.d/api-umbrella
+  rmdir /etc/api-umbrella > /dev/null 2>&1 # Delete directory if empty.
 }
 
 # On RedHat RPM systems, when an upgrade is performed, the old package is
