@@ -9,7 +9,7 @@ build_iteration 1
 
 override :beanstalkd, version: '1.10'
 override :bundler, version: '1.7.3'
-override :elasticsearch, version: '1.3.3'
+override :elasticsearch, version: '1.3.4'
 override :elasticsearch_bigdesk, version: 'v2.5.0'
 override :elasticsearch_head, version: '7f9afac7ff18bd78dce414debe44f4a4d077e12c'
 override :elasticsearch_hq, version: '14ac1972fbf8a5f603e80bae8abc4fa46b692794'
