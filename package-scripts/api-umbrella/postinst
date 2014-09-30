@@ -34,6 +34,13 @@ chmod 1777 /opt/api-umbrella/var/tmp
 chown -R api-umbrella:api-umbrella /opt/api-umbrella/etc /opt/api-umbrella/var
 chown -R api-umbrella-deploy:api-umbrella-deploy /opt/api-umbrella/embedded/apps
 
+# The ember-rails gem's handling of temp files isn't ideal when multiple users
+# might touch the files. So for now, just make these temp files globally
+# writable. See:
+# https://github.com/emberjs/ember-rails/issues/315#issuecomment-47703370
+# https://github.com/emberjs/ember-rails/pull/357
+chmod -R 777 /opt/api-umbrella/embedded/apps/web/current/tmp/ember-rails
+
 mkdir -p /etc/api-umbrella
 ln -sf /opt/api-umbrella/bin/api-umbrella /usr/bin/api-umbrella || error_exit "Cannot link api-umbrella to /usr/bin"
 cp /opt/api-umbrella/etc/init.d/api-umbrella /etc/init.d/api-umbrella || error_exit "Cannot copy api-umbrella to /etc/init.d"
