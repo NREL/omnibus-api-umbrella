@@ -6,6 +6,11 @@ dependency "pcre"
 dependency "readline"
 dependency "zlib"
 
+# Varnish needs a compiler at runtime for compiling VCL. gcc and clang are
+# pretty heavy weight, so let's try to get away with this tiny portable
+# compiler instead.
+dependency "pcc"
+
 source :url => "http://repo.varnish-cache.org/source/varnish-#{version}.tar.gz",
        :md5 => "53e272f448b2109ab370e03d794a243f"
 
