@@ -45,6 +45,10 @@ version "1.7.5" do
   source md5: 'e65aad627acc1cbe26527339a5814d57'
 end
 
+version "1.7.6" do
+  source md5: 'dd444e5333e0d324bec480e2ff67870a'
+end
+
 source :url => "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
