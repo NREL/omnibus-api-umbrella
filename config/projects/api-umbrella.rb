@@ -26,7 +26,7 @@ override :openssl, version: '1.0.1i'
 override :python, version: '2.7.7'
 override :redis, version: '2.8.17'
 override :ruby, version: '2.1.3'
-override :rubygems, version: '2.4.1'
+override :rubygems, version: '2.4.2'
 override :serf, version: '0.6.3'
 override :supervisor, version: '3.1.2'
 override :supervisor_mrlaforge, version: '0.6'
@@ -60,6 +60,13 @@ dependency 'api-umbrella-web'
 
 # version manifest file
 dependency 'version-manifest'
+
+# Place a package dependency on gcc, so it gets installed along with
+# api-umbrella. This is required for Varnish to run and perform VCL compiling.
+# Since gcc is a large dependency and we're not too picky about which version
+# gets installed, that's why we're referencing that as an external dependency,
+# rather than trying to bundle it inside the omnibus package.
+runtime_dependency 'gcc'
 
 exclude '\.git*'
 exclude 'bundler\/git'
