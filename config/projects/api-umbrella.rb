@@ -68,5 +68,9 @@ dependency 'version-manifest'
 # rather than trying to bundle it inside the omnibus package.
 runtime_dependency 'gcc'
 
+extra_package_file "/etc/init.d/api-umbrella"
+extra_package_file "/etc/api-umbrella/api-umbrella.yml"
+config_file "/etc/api-umbrella/api-umbrella.yml"
+
 exclude '\.git*'
 exclude 'bundler\/git'

@@ -1,5 +1,5 @@
 #
-# This file is used to configure the moomoo project. It contains
+# This file is used to configure the api-umbrella project. It contains
 # come minimal configuration examples for working with Omnibus. For a full list
 # of configurable options, please see the documentation for +omnibus/config.rb+.
 #
@@ -9,9 +9,9 @@
 # By default, Omnibus uses system folders (like +/var+ and +/opt+) to build and
 # cache compontents. If you would to build everything internally, you can
 # uncomment the following options. This will prevent the need for root
-# permissions in most cases. You will also need to update the moomoo
+# permissions in most cases. You will also need to update the api-umbrella
 # project configuration to build at +./local/omnibus/build+ instead of
-# +/opt/moomoo+
+# +/opt/api-umbrella+
 #
 # Uncomment this line to change the default base directory to "local"
 # -------------------------------------------------------------------

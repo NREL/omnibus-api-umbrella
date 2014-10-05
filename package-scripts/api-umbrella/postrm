@@ -17,7 +17,7 @@ function remove_service {
   fi
 
   rm -f /usr/bin/api-umbrella
-  rm -f /etc/init.d/api-umbrella
+  rm -f /var/log/api-umbrella
   rmdir /etc/api-umbrella > /dev/null 2>&1 # Delete directory if empty.
 }
 
