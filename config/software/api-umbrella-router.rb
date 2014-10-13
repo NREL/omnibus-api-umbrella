@@ -23,15 +23,25 @@ build do
   command "ln -s #{app_path}/current/bin/api-umbrella #{install_dir}/bin/api-umbrella", :env => env
 
   # Create global directories and files
+  # Note that the permission changes here are only so the build user can
+  # install files to these locations on the system without sudo for the erb
+  # commands (these permissions do not reflect the actual package install
+  # permissions).
   command "sudo rm -rf /etc/api-umbrella /etc/init.d/api-umbrella"
   command "sudo mkdir /etc/api-umbrella"
   command "sudo chown #{ENV["USER"]} /etc/api-umbrella"
   command "sudo touch /etc/init.d/api-umbrella"
   command "sudo chown #{ENV["USER"]} /etc/init.d/api-umbrella"
+  command "sudo touch /etc/logrotate.d/api-umbrella"
+  command "sudo chown #{ENV["USER"]} /etc/logrotate.d/api-umbrella"
 
   erb :source => "etc/init.d/api-umbrella.erb",
       :dest => "/etc/init.d/api-umbrella",
       :mode => 0755
+
+  erb :source => "etc/logrotate.d/api-umbrella.erb",
+      :dest => "/etc/logrotate.d/api-umbrella",
+      :mode => 0644
 
   erb :source => "etc/api-umbrella/api-umbrella.yml.erb",
       :dest => "/etc/api-umbrella/api-umbrella.yml",

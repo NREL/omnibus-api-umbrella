@@ -19,7 +19,7 @@ override :nginx, version: '1.7.6'
 override :nginx_echo, version: 'v0.56'
 override :nginx_headers_more, version: 'v0.25'
 override :nginx_devel_kit, version: 'v0.2.19'
-override :nginx_lua, version: 'd4275173156584efc5c362ca565394956194b206'
+override :nginx_lua, version: '2fe0d8dda2c31ec35ed96664104061be20e60ce2'
 override :nginx_txid, version: 'e7df6b153f394bb2d95dbe368d1b86eb7a85ad4f'
 override :nodejs, version: '0.10.32'
 override :openssl, version: '1.0.1i'
@@ -69,6 +69,7 @@ dependency 'version-manifest'
 runtime_dependency 'gcc'
 
 extra_package_file "/etc/init.d/api-umbrella"
+extra_package_file "/etc/logrotate.d/api-umbrella"
 extra_package_file "/etc/api-umbrella/api-umbrella.yml"
 config_file "/etc/api-umbrella/api-umbrella.yml"
 
