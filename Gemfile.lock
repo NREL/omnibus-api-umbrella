@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/opscode/omnibus-software.git
-  revision: b325286346b50c268ce23931a23d0db3944babb8
+  revision: 858cd951568a56c9df2791688cac9a522692c0f4
   branch: omnibus/3.2-stable
   specs:
     omnibus-software (3.0.0)
@@ -93,7 +93,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
     nio4r (1.0.1)
-    octokit (3.4.0)
+    octokit (3.4.2)
       sawyer (~> 0.5.3)
     ohai (7.4.0)
       ffi (~> 1.9)
@@ -116,14 +116,14 @@ GEM
     rainbow (2.0.0)
     rake (10.3.2)
     retryable (1.3.6)
-    ridley (4.0.0)
+    ridley (4.1.0)
       addressable
       buff-config (~> 1.0)
       buff-extensions (~> 1.0)
       buff-ignore (~> 1.1)
       buff-shell_out (~> 0.1)
-      celluloid (~> 0.16.0.pre)
-      celluloid-io (~> 0.16.0.pre)
+      celluloid (~> 0.16.0)
+      celluloid-io (~> 0.16.1)
       erubis
       faraday (~> 0.9.0)
       hashie (>= 2.0.2, < 3.0.0)

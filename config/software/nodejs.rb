@@ -46,6 +46,10 @@ version "0.10.32" do
   source :md5 => "f5fd3a03948ec5d12b49fdc7c49a5cac"
 end
 
+version "0.10.33" do
+  source :md5 => "626ca8a4f8fec4df49c78ed53d46f1f7"
+end
+
 source :url => "http://nodejs.org/dist/v#{version}/node-v#{version}.tar.gz"
 
 relative_path "node-v#{version}"

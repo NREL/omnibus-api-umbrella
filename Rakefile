@@ -107,13 +107,13 @@ task :outdated do
       current_commit = current_version_string
       if(current_commit !~ /^[0-9a-f]{5,40}$/)
         current_commit = `git ls-remote #{options[:git]} #{current_version_string}`.split(/\s/).first
-        if(current_commit.empty?)
+        if(current_commit.to_s.empty?)
           puts "#{name}: Could not parse version #{current_version_string}"
         end
       end
 
       latest_commit = `git ls-remote #{options[:git]} #{options[:git_ref]}`.split(/\s/).first
-      if(latest_commit.empty?)
+      if(latest_commit.to_s.empty?)
         puts "#{name}: Could not parse latest commit: git ls-remote #{options[:git]} #{options[:git_ref]}"
       end
 
