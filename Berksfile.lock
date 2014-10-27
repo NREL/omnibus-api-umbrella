@@ -1,10 +1,14 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: 2364f856eacc1fa13c1284867673fae1cca32179
+    revision: ad4c8ea24cfd3825c1e94aa4dee6d347932c3b8b
   apt (~> 2.0)
-  gecode (~> 2.1.0)
+  mongodb
+    git: git://github.com/NREL-cookbooks/mongodb.git
+    revision: ca5371cd3100c8224b069b938c9b981ebaca4cb9
+    branch: rhel7
   omnibus (~> 2.4.12)
+  phantomjs (~> 1.0.3)
   python-docutils
     git: git://github.com/NREL-cookbooks/python-docutils.git
     revision: 65238c77e9729cdce238004ffee73ecdd2251121
@@ -20,12 +24,14 @@ GRAPH
   build-essential (2.1.2)
   chef-sugar (2.4.1)
   chef_handler (1.1.6)
-  gecode (2.1.0)
-    apt (>= 0.0.0)
-    build-essential (>= 0.0.0)
-    yum (~> 3.0)
-    yum-epel (>= 0.0.0)
+  chocolatey (0.2.0)
+    windows (~> 1.31)
   homebrew (1.9.2)
+  mongodb (0.16.1)
+    apt (>= 1.8.2)
+    python (>= 0.0.0)
+    runit (>= 1.5.0)
+    yum (>= 3.0.0)
   omnibus (2.4.12)
     7-zip (~> 1.0)
     build-essential (~> 2.0)
@@ -33,11 +39,18 @@ GRAPH
     homebrew (~> 1.9)
     windows (~> 1.30)
     wix (~> 1.1)
+  phantomjs (1.0.3)
+    build-essential (>= 0.0.0)
+    chocolatey (>= 0.0.0)
   python (1.4.6)
     build-essential (>= 0.0.0)
     yum-epel (>= 0.0.0)
   python-docutils (0.1.0)
     python (>= 0.0.0)
+  runit (1.5.10)
+    build-essential (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
   sudo (2.7.1)
   vagrant_extras (0.2.2)
     sudo (>= 0.0.0)

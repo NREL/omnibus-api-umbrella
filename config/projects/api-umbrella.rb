@@ -1,12 +1,16 @@
-
 name 'api-umbrella'
 maintainer 'National Renewable Energy Laboratory'
 homepage 'http://github.com/NREL/api-umbrella'
 
 install_path    '/opt/api-umbrella'
-build_version   '0.6.0'
+build_version do
+  source :version, :from_dependency => "api_umbrella_router"
+  output_format :semver
+end
 build_iteration 1
 
+override :api_umbrella_router, version: '0.6.0'
+override :api_umbrella_web, version: 'master'
 override :beanstalkd, version: '1.10'
 override :bundler, version: '1.7.4'
 override :elasticsearch, version: '1.3.4'
@@ -36,27 +40,10 @@ override :varnish, version: '4.0.2'
 # creates required build directories
 dependency 'preparation'
 
-# api-umbrella dependencies/components
-dependency 'bundler'
-dependency 'elasticsearch'
-dependency 'elasticsearch_bigdesk'
-dependency 'elasticsearch_head'
-dependency 'elasticsearch_hq'
-dependency 'logrotate'
-dependency 'mongodb'
-dependency 'nginx'
-dependency 'nodejs'
-dependency 'redis'
-dependency 'ruby'
-dependency 'rubygems'
-dependency 'supervisor'
-dependency 'supervisor_mrlaforge'
-dependency 'supervisor_serialrestart'
-dependency 'varnish'
-
-dependency 'api-umbrella-router'
-dependency 'api-umbrella-static-site'
-dependency 'api-umbrella-web'
+# api-umbrella components
+dependency 'api_umbrella_router'
+dependency 'api_umbrella_static_site'
+dependency 'api_umbrella_web'
 
 # version manifest file
 dependency 'version-manifest'

@@ -72,6 +72,7 @@ GEM
       cabin (> 0)
       http_parser.rb (= 0.5.3)
     hashie (2.1.2)
+    highline (1.6.21)
     hitimes (1.2.2)
     http_parser.rb (0.5.3)
     ipaddress (0.8.0)
@@ -163,6 +164,7 @@ PLATFORMS
 
 DEPENDENCIES
   berkshelf (~> 3.1.5)
+  highline (~> 1.6.21)
   kitchen-vagrant (~> 0.15.0)
   omnibus (~> 3.2.1)
   omnibus-software!

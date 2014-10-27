@@ -36,4 +36,7 @@
 # Customize compiler bits
 # ------------------------------
 # solaris_compiler 'gcc'
-# build_retries 5
+
+# Don't attempt to retry failed commands so we fail faster when failures occur
+# on long-running commands.
+build_retries 0

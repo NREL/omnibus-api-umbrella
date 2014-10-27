@@ -15,7 +15,7 @@ start() {
   RETVAL=$?
   [ $RETVAL -eq 0 ] && touch $LOCKFILE
   return $RETVAL
-} 
+}
 
 stop() {
   api-umbrella stop

@@ -1,5 +1,21 @@
-name "api-umbrella-router"
+name "api_umbrella_router"
 default_version "master"
+
+dependency "bundler"
+dependency "elasticsearch"
+dependency "elasticsearch_bigdesk"
+dependency "elasticsearch_head"
+dependency "elasticsearch_hq"
+dependency "mongodb"
+dependency "nginx"
+dependency "nodejs"
+dependency "redis"
+dependency "ruby"
+dependency "rubygems"
+dependency "supervisor"
+dependency "supervisor_mrlaforge"
+dependency "supervisor_serialrestart"
+dependency "varnish"
 
 source :git => "https://github.com/NREL/api-umbrella-router.git"
 relative_path "api-umbrella-router"
@@ -21,6 +37,10 @@ build do
 
   # Install the main api umbrella binary that comes from the router.
   command "ln -s #{app_path}/current/bin/api-umbrella #{install_dir}/bin/api-umbrella", :env => env
+
+  # Ensure empty "shared" directories (that are symlinked to) stick around when
+  # rebuilding from omnibus's git cache.
+  command "find #{app_path}/shared -type d -empty -exec touch {}/.gitkeep \\;", :env => env
 
   # Create global directories and files
   # Note that the permission changes here are only so the build user can

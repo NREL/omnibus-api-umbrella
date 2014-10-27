@@ -11,23 +11,37 @@ provisioner:
 
 platforms:
   - name: centos-6.5
+    run_list: yum-epel::default
   - name: centos-7.0
+    run_list: yum-epel::default
   - name: debian-7.6
+    run_list: apt::default
   - name: ubuntu-12.04
     run_list: apt::default
   - name: ubuntu-14.04
     run_list: apt::default
 
 suites:
-  - name: default
+  - name: build
     run_list:
       - omnibus::default
       - python-docutils
       - vagrant_extras::passwordless_internal_ssh
-      - gecode::package
       - api-umbrella::omnibus_build
+      # Additional recipes for running tests after install has finished.
+      - mongodb::default
+      - phantomjs::default
     attributes:
       omnibus:
         build_user:  vagrant
         build_dir:   /home/vagrant/api-umbrella
         install_dir: /opt/api-umbrella
+  - name: test_install_package
+    run_list:
+      - api-umbrella::omnibus_test_built_package
+    attributes:
+      api_umbrella:
+    driver:
+      customize:
+        cpus: 1
+        memory: 1536

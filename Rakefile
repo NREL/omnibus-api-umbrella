@@ -1,3 +1,33 @@
+task :build do
+  require "highline/import"
+
+  sh "bundle install --binstubs --quiet"
+
+  instances = `bin/kitchen list --bare`.split("\n").sort
+  if(instances.empty?)
+    puts "No kitchen instances found"
+    exit 1
+  end
+
+  instances.select! { |instance| instance =~ /^build-/ }
+  instances.map! { |instance| instance.gsub!(/^build-/, "") }
+
+  instances << "all"
+
+  puts "\n\n"
+  instance = choose(*instances) do |menu|
+    menu.prompt = "Choose which instance to build: "
+  end
+
+  instance = "*" if(instance == "all")
+
+  build_instance = "build-#{instance}"
+  test_instance = "test_install_package-#{instance}"
+
+  sh "bin/kitchen test -c 2 #{build_instance}"
+  sh "bin/kitchen test -c 3 #{test_instance}"
+end
+
 # A task for trying to find outdated software versions based on what's being
 # built versus what's available.
 desc "Find outdated software dependencies"
@@ -6,6 +36,13 @@ task :outdated do
   require "rainbow"
 
   repos = {
+    "api_umbrella_router" => {
+      :git => "https://github.com/NREL/api-umbrella-router.git",
+    },
+    "api_umbrella_web" => {
+      :git => "https://github.com/NREL/api-umbrella-web.git",
+      :git_ref => "master",
+    },
     "beanstalkd" => {
       :git => "https://github.com/kr/beanstalkd.git",
     },
@@ -91,7 +128,12 @@ task :outdated do
 
   versions = {}
   repos.each do |name, options|
-    current_version_string = config.match(/^override :#{name}.*'(v?.+)'$/)[1]
+    current_version_matches = config.match(/^override :#{name}.*'(v?.+)'$/)
+    if(!current_version_matches)
+      raise "version override for #{name} not found in config/projects/api-umbrella.rb"
+    end
+
+    current_version_string = current_version_matches[1]
     current_version = current_version_string.gsub(/^v/, "")
     versions[name] = {
       :current_version => current_version,
