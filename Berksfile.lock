@@ -1,7 +1,7 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: ad4c8ea24cfd3825c1e94aa4dee6d347932c3b8b
+    revision: 17880c22357d9cd95f17b8cee4ed9e4be04fe92f
   apt (~> 2.0)
   mongodb
     git: git://github.com/NREL-cookbooks/mongodb.git

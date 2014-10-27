@@ -37,6 +37,6 @@
 # ------------------------------
 # solaris_compiler 'gcc'
 
-# Don't attempt to retry failed commands so we fail faster when failures occur
-# on long-running commands.
-build_retries 0
+# Lower the number of retries (down from 3) on failed commands so we fail
+# faster when failures occur on long-running commands.
+build_retries 1

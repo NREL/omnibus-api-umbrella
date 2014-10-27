@@ -22,7 +22,7 @@ task :build do
   instance = "*" if(instance == "all")
 
   build_instance = "build-#{instance}"
-  test_instance = "test_install_package-#{instance}"
+  test_instance = "test-install-package-#{instance}"
 
   sh "bin/kitchen test -c 2 #{build_instance}"
   sh "bin/kitchen test -c 3 #{test_instance}"
