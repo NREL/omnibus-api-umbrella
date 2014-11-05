@@ -13,7 +13,9 @@ source :url => "https://github.com/kr/beanstalkd/archive/v#{version}.tar.gz"
 
 relative_path "beanstalkd-#{version}"
 
+env = with_standard_compiler_flags(with_embedded_path)
+
 build do
-  command "make"
-  command "cp ./beanstalkd #{install_dir}/embedded/bin/"
+  command "make", :env => env
+  command "make install PREFIX=#{install_dir}/embedded"
 end

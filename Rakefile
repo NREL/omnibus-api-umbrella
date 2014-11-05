@@ -49,6 +49,9 @@ task :outdated do
     "bundler" => {
       :git => "https://github.com/bundler/bundler.git",
     },
+    "dnsmasq" => {
+      :git => "git://thekelleys.org.uk/dnsmasq.git",
+    },
     "elasticsearch" => {
       :git => "https://github.com/elasticsearch/elasticsearch.git",
     },
@@ -88,6 +91,10 @@ task :outdated do
     },
     "nginx_txid" => {
       :git => "https://github.com/streadway/ngx_txid.git",
+      :git_ref => "master",
+    },
+    "nginx_upstream_jdomain" => {
+      :git => "https://github.com/wdaike/ngx_upstream_jdomain.git",
       :git_ref => "master",
     },
     "nodejs" => {

@@ -24,6 +24,7 @@ dependency "nginx_echo"
 dependency "nginx_headers_more"
 dependency "nginx_lua"
 dependency "nginx_txid"
+dependency "nginx_upstream_jdomain"
 
 version "1.7.1" do
   source md5: '9659cbb26f226f6390b18ef991a79233'
@@ -49,6 +50,10 @@ version "1.7.6" do
   source md5: 'dd444e5333e0d324bec480e2ff67870a'
 end
 
+version "1.7.7" do
+  source md5: '3beaa25fc87ff2a75ab1b46174dc5ebf'
+end
+
 source :url => "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
@@ -72,6 +77,7 @@ build do
     "export NGINX_MODULE_ECHO_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_echo`",
     "export NGINX_MODULE_HEADERS_MORE_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_headers_more`",
     "export NGINX_MODULE_TXID_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_txid`",
+    "export NGINX_MODULE_UPSTREAM_JDOMAIN_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_upstream_jdomain`",
     "export NGINX_MODULE_DEVEL_KIT_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_devel_kit`",
     "export NGINX_MODULE_LUA_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_lua`",
     [
@@ -95,6 +101,7 @@ build do
       "--add-module=$NGINX_MODULE_ECHO_VERSIONED_PATH",
       "--add-module=$NGINX_MODULE_HEADERS_MORE_VERSIONED_PATH",
       "--add-module=$NGINX_MODULE_TXID_VERSIONED_PATH",
+      "--add-module=$NGINX_MODULE_UPSTREAM_JDOMAIN_VERSIONED_PATH",
       "--add-module=$NGINX_MODULE_DEVEL_KIT_VERSIONED_PATH",
       "--add-module=$NGINX_MODULE_LUA_VERSIONED_PATH",
       "--with-ipv6",

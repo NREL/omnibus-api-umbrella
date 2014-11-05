@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/opscode/omnibus-software.git
-  revision: 858cd951568a56c9df2791688cac9a522692c0f4
+  revision: dce2843930cba076b97219f40d0ca28ab1dbb116
   branch: omnibus/3.2-stable
   specs:
     omnibus-software (3.0.0)
@@ -94,7 +94,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
     nio4r (1.0.1)
-    octokit (3.4.2)
+    octokit (3.5.2)
       sawyer (~> 0.5.3)
     ohai (7.4.0)
       ffi (~> 1.9)

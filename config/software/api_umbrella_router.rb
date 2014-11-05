@@ -1,7 +1,9 @@
 name "api_umbrella_router"
 default_version "master"
 
+dependency "beanstalkd"
 dependency "bundler"
+dependency "dnsmasq"
 dependency "elasticsearch"
 dependency "elasticsearch_bigdesk"
 dependency "elasticsearch_head"
