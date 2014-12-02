@@ -48,6 +48,10 @@ version "2.4.2" do
   source md5: "cb99da45a813b55755cf9d0abc51d3f6"
 end
 
+version "2.4.4" do
+  source md5: "440a89ad6a3b1b7a69b034233cc4658e"
+end
+
 source url: "http://production.cf.rubygems.org/rubygems/rubygems-#{version}.tgz"
 
 relative_path "rubygems-#{version}"

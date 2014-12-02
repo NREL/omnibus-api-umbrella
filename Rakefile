@@ -66,9 +66,6 @@ task :outdated do
       :git => "https://github.com/royrusso/elasticsearch-HQ.git",
       :git_ref => "master",
     },
-    "luajit" => {
-      :git => "http://luajit.org/git/luajit-2.0.git",
-    },
     "mongodb" => {
       :git => "https://github.com/mongodb/mongo.git",
       :constraint => "~> 2.6.3",
@@ -82,19 +79,8 @@ task :outdated do
     "nginx_headers_more" => {
       :git => "https://github.com/openresty/headers-more-nginx-module.git",
     },
-    "nginx_devel_kit" => {
-      :git => "https://github.com/simpl/ngx_devel_kit.git",
-    },
-    "nginx_lua" => {
-      :git => "https://github.com/openresty/lua-nginx-module.git",
-      :git_ref => "master",
-    },
     "nginx_txid" => {
       :git => "https://github.com/streadway/ngx_txid.git",
-      :git_ref => "master",
-    },
-    "nginx_upstream_jdomain" => {
-      :git => "https://github.com/wdaike/ngx_upstream_jdomain.git",
       :git_ref => "master",
     },
     "nodejs" => {
@@ -192,7 +178,7 @@ task :outdated do
         end
 
         tag.gsub!(/^v/, "")
-        tag.gsub!(/(\d)[\._]?(beta|rc|pre|alpha|dev)/, '\1-\2')
+        tag.gsub!(/(\d)[\._]?(beta|rc|pre|alpha|dev|test)/, '\1-\2')
         tag.gsub!(/(\d)([a-z][\d\.]+)$/, '\1-\2')
         tag.gsub!(/(\d+\.\d+\.\d+)\.(\d+)$/, '\1+\2')
         tag.gsub!(/^(\d+\.\d+)-([a-z])/, '\1.0-\2')
@@ -245,14 +231,14 @@ task :outdated do
 
   puts "\n\n"
 
-  print Rainbow("Package".ljust(24)).underline
+  print Rainbow("Package".ljust(32)).underline
   print Rainbow("Current".rjust(16)).underline
   print Rainbow("Wanted".rjust(16)).underline
   print Rainbow("Latest".rjust(16)).underline
   puts ""
 
   versions.each do |name, info|
-    name_column = name.ljust(24)
+    name_column = name.ljust(32)
     if(info[:wanted_version] != info[:current_version])
       print Rainbow(name_column).red
     elsif(info[:current_version] != info[:latest_version])

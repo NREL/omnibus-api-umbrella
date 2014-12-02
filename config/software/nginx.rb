@@ -22,9 +22,7 @@ dependency "pcre"
 dependency "openssl"
 dependency "nginx_echo"
 dependency "nginx_headers_more"
-dependency "nginx_lua"
 dependency "nginx_txid"
-dependency "nginx_upstream_jdomain"
 
 version "1.7.1" do
   source md5: '9659cbb26f226f6390b18ef991a79233'
@@ -64,9 +62,6 @@ env = {
 
   "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
   "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-
-  "LUAJIT_LIB" => "#{install_dir}/embedded/lib",
-  "LUAJIT_INC" => "#{install_dir}/embedded/include/luajit-2.0",
 }
 
 build do
@@ -77,9 +72,6 @@ build do
     "export NGINX_MODULE_ECHO_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_echo`",
     "export NGINX_MODULE_HEADERS_MORE_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_headers_more`",
     "export NGINX_MODULE_TXID_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_txid`",
-    "export NGINX_MODULE_UPSTREAM_JDOMAIN_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_upstream_jdomain`",
-    "export NGINX_MODULE_DEVEL_KIT_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_devel_kit`",
-    "export NGINX_MODULE_LUA_VERSIONED_PATH=`readlink -n #{source_dir}/nginx_lua`",
     [
       "./configure",
       "--prefix=#{install_dir}/embedded",
@@ -101,11 +93,7 @@ build do
       "--add-module=$NGINX_MODULE_ECHO_VERSIONED_PATH",
       "--add-module=$NGINX_MODULE_HEADERS_MORE_VERSIONED_PATH",
       "--add-module=$NGINX_MODULE_TXID_VERSIONED_PATH",
-      "--add-module=$NGINX_MODULE_UPSTREAM_JDOMAIN_VERSIONED_PATH",
-      "--add-module=$NGINX_MODULE_DEVEL_KIT_VERSIONED_PATH",
-      "--add-module=$NGINX_MODULE_LUA_VERSIONED_PATH",
       "--with-ipv6",
-      "--with-debug",
       "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\""
     ].join(" "),
   ].join(" && "), :env => env

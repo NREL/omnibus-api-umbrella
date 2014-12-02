@@ -34,6 +34,14 @@ version "1.3.4" do
   source md5: '4d718cc9db428486ab06e19fc098b196'
 end
 
+version "1.3.5" do
+  source md5: '7a3581063908abe921ca5b4276c46eca'
+end
+
+version "1.4.1" do
+  source md5: 'e0fdc0b7c64f56b353df32a96325ece8'
+end
+
 source :url => "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-#{version}.tar.gz"
 
 relative_path "elasticsearch-#{version}"
