@@ -24,6 +24,22 @@ getent passwd $DEPLOY_USER > /dev/null || \
   useradd -r -g $DEPLOY_GROUP -s /sbin/nologin \
     -d /opt/api-umbrella/embedded/apps -c "API Umbrella deployment user" $DEPLOY_USER
 
+# Fix previously created deploy user that couldn't actually login.
+if getent passwd $DEPLOY_USER | grep "/sbin/nologin" > /dev/null; then
+  usermod -d /home/$DEPLOY_USER -s /bin/bash $DEPLOY_USER
+fi
+
+# Create an empty .ssh/authorized_keys file with proper permissions if it
+# doesn't already exist.
+if [ ! -f /home/$DEPLOY_USER/.ssh/authorized_keys ]; then
+  mkdir -p /home/$DEPLOY_USER/.ssh
+  touch /home/$DEPLOY_USER/.ssh/authorized_keys
+  chown -R $DEPLOY_USER:$DEPLOY_GROUP /home/$DEPLOY_USER
+  chmod 700 /home/$DEPLOY_USER
+  chmod 700 /home/$DEPLOY_USER/.ssh
+  chmod 600 /home/$DEPLOY_USER/.ssh/authorized_keys
+fi
+
 mkdir -p /opt/api-umbrella/etc
 mkdir -p /opt/api-umbrella/var/db
 mkdir -p /opt/api-umbrella/var/log
@@ -31,8 +47,8 @@ mkdir -p /opt/api-umbrella/var/run
 mkdir -p /opt/api-umbrella/var/tmp
 chmod 1777 /opt/api-umbrella/var/tmp
 
-chown -R api-umbrella:api-umbrella /opt/api-umbrella/etc /opt/api-umbrella/var
-chown -R api-umbrella-deploy:api-umbrella-deploy /opt/api-umbrella/embedded/apps
+chown -R $USER:$GROUP /opt/api-umbrella/etc /opt/api-umbrella/var
+chown -R $DEPLOY_USER:$DEPLOY_GROUP /opt/api-umbrella/embedded/apps
 
 # The ember-rails gem's handling of temp files isn't ideal when multiple users
 # might touch the files. So for now, just make these temp files globally
