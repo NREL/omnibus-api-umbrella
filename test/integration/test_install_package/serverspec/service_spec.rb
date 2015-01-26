@@ -12,6 +12,15 @@ describe "api-umbrella" do
     expect(service("api-umbrella")).to be_enabled
   end
 
+  it "reports the correct status regardless of HOME environment variable" do
+    # This accounts for HOME being different under Ubuntu's boot than when
+    # running "sudo /etc/init.d/api-umbrella *"
+    # See: https://github.com/NREL/api-umbrella/issues/89
+    expect(`env HOME=/ /etc/init.d/api-umbrella status`).to include("is running")
+    expect(`env HOME=/foo /etc/init.d/api-umbrella status`).to include("is running")
+    expect(`env HOME=/root /etc/init.d/api-umbrella status`).to include("is running")
+  end
+
   it "listens on port 80" do
     expect(port(80)).to be_listening.on("0.0.0.0").with("tcp")
   end
