@@ -96,6 +96,7 @@ task :outdated do
     },
     "ruby" => {
       :git => "https://github.com/ruby/ruby.git",
+      :constraint => "~> 2.1.5",
     },
     "rubygems" => {
       :git => "https://github.com/rubygems/rubygems.git",
@@ -121,7 +122,7 @@ task :outdated do
 
   versions = {}
   repos.each do |name, options|
-    current_version_matches = config.match(/^override :#{name}.*'(v?.+)'$/)
+    current_version_matches = config.match(/^override :#{name}, *version: *['"](v?.+?)['"]/)
     if(!current_version_matches)
       raise "version override for #{name} not found in config/projects/api-umbrella.rb"
     end

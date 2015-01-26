@@ -18,6 +18,10 @@
 name "redis"
 default_version "2.8.10"
 
+version "2.8.19" do
+  source :md5 => "3794107224043465603f48941f5c86a7"
+end
+
 version "2.8.17" do
   source :md5 => "69023c3005664602268a5e2dbe23425c"
 end

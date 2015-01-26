@@ -17,6 +17,22 @@ version "2.6.5" do
   end
 end
 
+version "2.6.6" do
+  if(Ohai['kernel']['machine'] =~ /x86_64/)
+    source :md5 => "0eef7cb40c52c754eee3c47a74dc837c"
+  else
+    source :md5 => "a4f17ecdc55d9e216cd6112bc9c6b669"
+  end
+end
+
+version "2.6.7" do
+  if(Ohai['kernel']['machine'] =~ /x86_64/)
+    source :md5 => "d999313e7bbfcf814c845a7476246b77"
+  else
+    source :md5 => "87a57c05e428fe1ced619e63107140ff"
+  end
+end
+
 source :url => "http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-#{version}.tgz"
 
 if(Ohai['kernel']['machine'] =~ /x86_64/)

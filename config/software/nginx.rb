@@ -52,17 +52,15 @@ version "1.7.7" do
   source md5: '3beaa25fc87ff2a75ab1b46174dc5ebf'
 end
 
+version "1.7.9" do
+  source md5: 'a4debbe0ce0dd12b9c8f520bc3b66355'
+end
+
 source :url => "http://nginx.org/download/nginx-#{version}.tar.gz"
 
 relative_path "nginx-#{version}"
 
-env = {
-  "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}",
-  "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
-
-  "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-  "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-}
+env = with_standard_compiler_flags(with_embedded_path)
 
 build do
   command [
@@ -94,7 +92,8 @@ build do
       "--add-module=$NGINX_MODULE_HEADERS_MORE_VERSIONED_PATH",
       "--add-module=$NGINX_MODULE_TXID_VERSIONED_PATH",
       "--with-ipv6",
-      "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\""
+      "--with-cc-opt=\"-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include\"",
+      "--with-ld-opt=\"-L#{install_dir}/embedded/lib\"",
     ].join(" "),
   ].join(" && "), :env => env
   command "make -j #{max_build_jobs}", :env => env
