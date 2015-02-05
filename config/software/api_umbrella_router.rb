@@ -56,6 +56,8 @@ build do
   command "sudo chown #{ENV["USER"]} /etc/init.d/api-umbrella"
   command "sudo touch /etc/logrotate.d/api-umbrella"
   command "sudo chown #{ENV["USER"]} /etc/logrotate.d/api-umbrella"
+  command "sudo touch /etc/sudoers.d/api-umbrella"
+  command "sudo chown #{ENV["USER"]} /etc/sudoers.d/api-umbrella"
 
   erb :source => "etc/init.d/api-umbrella.erb",
       :dest => "/etc/init.d/api-umbrella",
@@ -64,6 +66,10 @@ build do
   erb :source => "etc/logrotate.d/api-umbrella.erb",
       :dest => "/etc/logrotate.d/api-umbrella",
       :mode => 0644
+
+  erb :source => "etc/sudoers.d/api-umbrella.erb",
+      :dest => "/etc/sudoers.d/api-umbrella",
+      :mode => 0640
 
   erb :source => "etc/api-umbrella/api-umbrella.yml.erb",
       :dest => "/etc/api-umbrella/api-umbrella.yml",

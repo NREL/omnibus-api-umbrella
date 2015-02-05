@@ -56,6 +56,7 @@ runtime_dependency 'gcc'
 
 extra_package_file "/etc/init.d/api-umbrella"
 extra_package_file "/etc/logrotate.d/api-umbrella"
+extra_package_file "/etc/sudoers.d/api-umbrella"
 extra_package_file "/etc/api-umbrella/api-umbrella.yml"
 config_file "/etc/api-umbrella/api-umbrella.yml"
 
