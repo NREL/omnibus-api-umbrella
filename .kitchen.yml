@@ -28,14 +28,29 @@ suites:
       - python-docutils
       - vagrant_extras::passwordless_internal_ssh
       - api-umbrella::omnibus_build
+
       # Additional recipes for running tests after install has finished.
+      - java::default
+      - elasticsearch::default
       - mongodb::default
       - phantomjs::default
+      - packages::default
+      - services::default
     attributes:
+      elasticsearch:
+        version: 1.4.2
+        allocated_memory: 256m
+      java:
+        jdk_version: 7
       omnibus:
         build_user:  vagrant
         build_dir:   /home/vagrant/api-umbrella
         install_dir: /opt/api-umbrella
+      packages:
+        - unbound
+      services:
+        elasticsearch:
+          - start
   - name: test_install_package
     run_list:
       - api-umbrella::omnibus_test_built_package

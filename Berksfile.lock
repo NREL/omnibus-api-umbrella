@@ -1,17 +1,24 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: 17880c22357d9cd95f17b8cee4ed9e4be04fe92f
+    revision: 3d04a592cf8a21889e141f4c658ecf6f2b415afe
   apt (~> 2.0)
+  elasticsearch (~> 0.3.13)
+  java (~> 1.31.0)
   mongodb
     git: git://github.com/NREL-cookbooks/mongodb.git
     revision: ca5371cd3100c8224b069b938c9b981ebaca4cb9
     branch: rhel7
-  omnibus (~> 2.4.12)
+  omnibus
+    git: git://github.com/NREL-cookbooks/omnibus.git
+    revision: d6575422e39a502f79b10bfb5c1bb7700910cbea
+    branch: fix_rsync
+  packages (~> 0.4.0)
   phantomjs (~> 1.0.3)
   python-docutils
     git: git://github.com/NREL-cookbooks/python-docutils.git
     revision: 65238c77e9729cdce238004ffee73ecdd2251121
+  services (~> 0.2.0)
   vagrant_extras
     git: git://github.com/NREL-cookbooks/vagrant_extras.git
     revision: 36f43d66fa52edd8e7ba297dfd55eecda88aa685
@@ -20,25 +27,52 @@ GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
   api-umbrella (0.6.0)
-  apt (2.6.0)
-  build-essential (2.1.2)
-  chef-sugar (2.4.1)
+    build-essential (>= 0.0.0)
+    curl (>= 0.0.0)
+    git (>= 0.0.0)
+    phantomjs (>= 0.0.0)
+    sudo (>= 0.0.0)
+  apt (2.6.1)
+  ark (0.9.0)
+    7-zip (>= 0.0.0)
+    windows (>= 0.0.0)
+  build-essential (2.1.3)
+  chef-sugar (2.5.0)
   chef_handler (1.1.6)
   chocolatey (0.2.0)
     windows (~> 1.31)
-  homebrew (1.9.2)
+  curl (2.0.1)
+  dmg (2.2.2)
+  elasticsearch (0.3.13)
+    ark (>= 0.2.4)
+    build-essential (>= 0.0.0)
+    java (>= 0.0.0)
+    monit (>= 0.0.0)
+    xml (>= 0.0.0)
+  git (4.1.0)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    runit (>= 1.0)
+    windows (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  homebrew (1.12.0)
+    build-essential (>= 2.1.2)
+  java (1.31.0)
   mongodb (0.16.1)
     apt (>= 1.8.2)
     python (>= 0.0.0)
     runit (>= 1.5.0)
     yum (>= 3.0.0)
-  omnibus (2.4.12)
+  monit (0.7.5)
+  omnibus (2.5.1)
     7-zip (~> 1.0)
     build-essential (~> 2.0)
     chef-sugar (~> 2.0)
     homebrew (~> 1.9)
     windows (~> 1.30)
     wix (~> 1.1)
+  packages (0.4.0)
   phantomjs (1.0.3)
     build-essential (>= 0.0.0)
     chocolatey (>= 0.0.0)
@@ -47,17 +81,21 @@ GRAPH
     yum-epel (>= 0.0.0)
   python-docutils (0.1.0)
     python (>= 0.0.0)
-  runit (1.5.10)
+  runit (1.5.14)
     build-essential (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
+  services (0.2.0)
   sudo (2.7.1)
   vagrant_extras (0.2.2)
     sudo (>= 0.0.0)
-  windows (1.34.8)
+  windows (1.36.1)
     chef_handler (>= 0.0.0)
   wix (1.1.0)
     windows (>= 1.2.2)
-  yum (3.4.1)
-  yum-epel (0.5.2)
+  xml (1.2.9)
+    build-essential (>= 0.0.0)
+    chef-sugar (>= 0.0.0)
+  yum (3.5.2)
+  yum-epel (0.6.0)
     yum (~> 3.0)
