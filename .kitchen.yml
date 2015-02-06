@@ -2,7 +2,7 @@ driver:
   name: vagrant
   customize:
     cpus: 2
-    memory: 2048
+    memory: 2560
   synced_folders:
     - ['.', '/home/vagrant/api-umbrella']
 

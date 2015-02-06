@@ -77,6 +77,8 @@ build do
       :mode => 0644
 
   # After installing the sudoers template, set it's owner to root, to silence
-  # sudoer warnings about being the wrong owner.
+  # sudoer warnings about being the wrong owner. But make sure it's still
+  # readable by the omnibus user so it can be packaged.
   command "sudo chown root /etc/sudoers.d/api-umbrella"
+  command "sudo chgrp #{ENV["USER"]} /etc/sudoers.d/api-umbrella"
 end
