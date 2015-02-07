@@ -3,13 +3,10 @@ maintainer 'National Renewable Energy Laboratory'
 homepage 'http://github.com/NREL/api-umbrella'
 
 install_path    '/opt/api-umbrella'
-build_version do
-  source :version, :from_dependency => "api_umbrella_router"
-  output_format :semver
-end
+build_version(ENV["API_UMBRELLA_VERSION"] || raise("API_UMBRELLA_VERSION environment variable must be set"))
 build_iteration 1
 
-override :api_umbrella_router, version: '0.6.0'
+override :api_umbrella_router, version: 'master'
 override :api_umbrella_web, version: 'master'
 override :beanstalkd, version: '1.10'
 override :bundler, version: '1.7.12'

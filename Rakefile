@@ -38,6 +38,7 @@ task :outdated do
   repos = {
     "api_umbrella_router" => {
       :git => "https://github.com/NREL/api-umbrella-router.git",
+      :git_ref => "master",
     },
     "api_umbrella_web" => {
       :git => "https://github.com/NREL/api-umbrella-web.git",
