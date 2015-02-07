@@ -29,9 +29,9 @@
 # Enable S3 asset caching
 # ------------------------------
 # use_s3_caching true
-# s3_access_key  'something'
-# s3_secret_key  'something'
-# s3_bucket      'some-bucket'
+s3_access_key  ENV['AWS_ACCESS_KEY']
+s3_secret_key  ENV['AWS_SECRET_KEY']
+s3_bucket      ENV['AWS_S3_BUCKET']
 
 # Customize compiler bits
 # ------------------------------
