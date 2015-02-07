@@ -56,4 +56,14 @@ describe "api-umbrella" do
       expect(error.response).to include("API_KEY_INVALID")
     end
   end
+
+  it "fails immediately when startup script is called as an unauthorized user" do
+    `sudo -u api-umbrella-deploy /etc/init.d/api-umbrella start`
+    expect($!.to_i).not_to eql(0)
+  end
+
+  it "allows the deploy user to execute api-umbrella as root" do
+    expect(`sudo -u api-umbrella-deploy sudo -n api-umbrella status`).to include("is running")
+    expect(`sudo -u api-umbrella-deploy sudo -n /etc/init.d/api-umbrella status`).to include("is running")
+  end
 end
