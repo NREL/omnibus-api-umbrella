@@ -21,7 +21,7 @@ DEPENDENCIES
   services (~> 0.2.0)
   vagrant_extras
     git: git://github.com/NREL-cookbooks/vagrant_extras.git
-    revision: 4022ed86ebdf88146960540ee257dd42c982e9d1
+    revision: 26f3580199145da3450ba512b4a566979e6ccdb4
 
 GRAPH
   7-zip (1.0.2)
