@@ -58,6 +58,7 @@ build do
   command "sudo chown #{ENV["USER"]} /etc/logrotate.d/api-umbrella"
   command "sudo touch /etc/sudoers.d/api-umbrella"
   command "sudo chmod 755 /etc/sudoers.d"
+  command "sudo chown #{ENV["USER"]} /etc/sudoers.d/api-umbrella"
 
   erb :source => "etc/init.d/api-umbrella.erb",
       :dest => "/etc/init.d/api-umbrella",
@@ -74,4 +75,9 @@ build do
   erb :source => "etc/api-umbrella/api-umbrella.yml.erb",
       :dest => "/etc/api-umbrella/api-umbrella.yml",
       :mode => 0644
+
+  # After installing the sudoers template, set it's owner to root, to silence
+  # sudoer warnings about being the wrong owner. But make sure it's still
+  # readable by the omnibus user so it can be packaged.
+  command "sudo chown root /etc/sudoers.d/api-umbrella"
 end
