@@ -19,7 +19,7 @@ cookbook 'api-umbrella', :github => 'NREL-cookbooks/api-umbrella'
 # Additional cookbooks for running tests after install has finished.
 cookbook 'elasticsearch', '~> 0.3.13'
 cookbook 'java', '~> 1.31.0'
-cookbook 'mongodb', :github => 'NREL-cookbooks/mongodb', :branch => "rhel7"
+cookbook 'mongodb', '~> 0.16.2'
 cookbook 'packages', '~> 0.4.0'
 cookbook 'phantomjs', '~> 1.0.3'
 cookbook 'services', '~> 0.2.0'

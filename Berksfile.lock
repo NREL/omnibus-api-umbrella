@@ -1,14 +1,11 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: 3d04a592cf8a21889e141f4c658ecf6f2b415afe
+    revision: fffe7180dee18556bc36927a660170524561450a
   apt (~> 2.0)
   elasticsearch (~> 0.3.13)
   java (~> 1.31.0)
-  mongodb
-    git: git://github.com/NREL-cookbooks/mongodb.git
-    revision: ca5371cd3100c8224b069b938c9b981ebaca4cb9
-    branch: rhel7
+  mongodb (~> 0.16.2)
   omnibus
     git: git://github.com/NREL-cookbooks/omnibus.git
     revision: d6575422e39a502f79b10bfb5c1bb7700910cbea
@@ -59,11 +56,11 @@ GRAPH
   homebrew (1.12.0)
     build-essential (>= 2.1.2)
   java (1.31.0)
-  mongodb (0.16.1)
+  mongodb (0.16.2)
     apt (>= 1.8.2)
     python (>= 0.0.0)
     runit (>= 1.5.0)
-    yum (>= 3.0.0)
+    yum (>= 3.0)
   monit (0.7.5)
   omnibus (2.5.1)
     7-zip (~> 1.0)
