@@ -21,8 +21,8 @@ getent passwd $USER > /dev/null || \
 
 getent group $DEPLOY_GROUP > /dev/null || groupadd -r $DEPLOY_GROUP
 getent passwd $DEPLOY_USER > /dev/null || \
-  useradd -r -g $DEPLOY_GROUP -s /sbin/nologin \
-    -d /opt/api-umbrella/embedded/apps -c "API Umbrella deployment user" $DEPLOY_USER
+  useradd -r -g $DEPLOY_GROUP -s /bin/bash \
+    -d /home/$DEPLOY_USER -c "API Umbrella deployment user" $DEPLOY_USER
 
 # Fix previously created deploy user that couldn't actually login.
 if getent passwd $DEPLOY_USER | grep "/sbin/nologin" > /dev/null; then
