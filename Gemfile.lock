@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/gfloyd/kitchen-ec2.git
+  revision: e471f6a2104f863fc6d6b7465f0c78575e6882b7
+  branch: fix-spot-security-groups
+  specs:
+    kitchen-ec2 (0.8.1.dev)
+      fog
+      test-kitchen (~> 1.0)
+
+GIT
   remote: git://github.com/opscode/omnibus-software.git
   revision: 05ca3f4fa319e41d6817c2fe344e1415a1033781
   branch: omnibus/3.2-stable
@@ -8,6 +17,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.0)
     addressable (2.3.6)
     arr-pm (0.0.9)
       cabin (> 0)
@@ -37,6 +47,7 @@ GEM
     buff-ruby_engine (0.1.0)
     buff-shell_out (0.2.0)
       buff-ruby_engine (~> 0.1.0)
+    builder (3.2.2)
     cabin (0.6.1)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -52,12 +63,91 @@ GEM
       dep-selector-libgecode (~> 1.0)
       ffi (~> 1.9)
     erubis (2.7.0)
+    excon (0.44.1)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
     ffi-yajl (1.3.1)
       ffi (~> 1.5)
       libyajl2 (~> 1.2)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (1.27.0)
+      fog-atmos
+      fog-aws (~> 0.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.27, >= 1.27.3)
+      fog-ecloud
+      fog-json
+      fog-profitbricks
+      fog-radosgw (>= 0.0.2)
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xml (~> 0.1.1)
+      ipaddress (~> 0.5)
+      nokogiri (~> 1.5, >= 1.5.11)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (0.1.0)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.7.1)
+      fog-core (~> 1.22)
+      fog-json
+      inflecto (~> 0.0.2)
+    fog-core (1.28.0)
+      builder
+      excon (~> 0.38)
+      formatador (~> 0.2)
+      mime-types
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+    fog-ecloud (0.0.2)
+      fog-core
+      fog-xml
+    fog-json (1.0.0)
+      multi_json (~> 1.0)
+    fog-profitbricks (0.0.1)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-radosgw (0.0.3)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-sakuracloud (1.0.0)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.1)
+      fog-core
+      fog-json
+    fog-softlayer (0.4.0)
+      fog-core
+      fog-json
+    fog-storm_on_demand (0.1.0)
+      fog-core
+      fog-json
+    fog-terremark (0.0.3)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.0.1)
+      fission
+      fog-core
+    fog-voxel (0.0.2)
+      fog-core
+      fog-xml
+    fog-xml (0.1.1)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
+    formatador (0.2.5)
     fpm (0.4.42)
       arr-pm (~> 0.0.8)
       backports (>= 2.6.2)
@@ -75,12 +165,17 @@ GEM
     highline (1.6.21)
     hitimes (1.2.2)
     http_parser.rb (0.6.0)
+    inflecto (0.0.2)
     ipaddress (0.8.0)
     json (1.8.2)
+    kitchen-sync (1.0.1)
+      net-sftp
+      test-kitchen (>= 1.0.0)
     kitchen-vagrant (0.15.0)
       test-kitchen (~> 1.0)
     libyajl2 (1.2.0)
     mime-types (1.25.1)
+    mini_portile (0.6.2)
     minitar (0.5.4)
     mixlib-authentication (1.3.0)
       mixlib-log
@@ -88,12 +183,17 @@ GEM
     mixlib-config (2.1.0)
     mixlib-log (1.6.0)
     mixlib-shellout (1.6.1)
+    multi_json (1.10.1)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     nio4r (1.1.0)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
     octokit (3.7.0)
       sawyer (~> 0.6.0, >= 0.5.3)
     ohai (7.4.1)
@@ -165,6 +265,8 @@ PLATFORMS
 DEPENDENCIES
   berkshelf (~> 3.1.5)
   highline (~> 1.6.21)
+  kitchen-ec2!
+  kitchen-sync
   kitchen-vagrant (~> 0.15.0)
   omnibus (~> 3.2.1)
   omnibus-software!

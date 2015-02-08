@@ -1,5 +1,6 @@
 task :build do
   require "highline/import"
+  require "semverse"
 
   sh "bundle install --binstubs --quiet"
 
@@ -15,6 +16,25 @@ task :build do
   instances << "all"
 
   puts "\n\n"
+
+  ENV["API_UMBRELLA_VERSION"] ||= ask("API Umbrella version number to build (eg, 0.3.0): ")
+  ENV["API_UMBRELLA_ITERATION"] ||= "1"
+
+  # Validate the version given.
+  Semverse::Version.new(ENV["API_UMBRELLA_VERSION"])
+
+  ENV["KITCHEN_DRIVER"] ||= choose("aws", "vagrant") do |menu|
+    menu.prompt = "Choose where to build the packages: "
+  end
+
+  if(ENV["KITCHEN_DRIVER"] == "aws")
+    ENV["AWS_ACCESS_KEY"] ||= ask("AWS Access Key ID: ")
+    ENV["AWS_SECRET_KEY"] ||= ask("AWS Secret Access Key: ")
+    ENV["AWS_SSH_KEY_ID"] ||= ask("AWS SSH Key Pair ID: ")
+    ENV["AWS_SSH_KEY_PATH"] ||= ask("AWS SSH Key Pair Private Key Path: ")
+    raise("AWS private key path doesn't exist (#{ENV["AWS_SSH_KEY_PATH"]})") unless(File.exists?(File.expand_path(ENV["AWS_SSH_KEY_PATH"])))
+  end
+
   instance = choose(*instances) do |menu|
     menu.prompt = "Choose which instance to build: "
   end
@@ -24,8 +44,13 @@ task :build do
   build_instance = "build-#{instance}"
   test_instance = "test-install-package-#{instance}"
 
-  sh "bin/kitchen test -c 2 #{build_instance}"
-  sh "bin/kitchen test -c 3 #{test_instance}"
+  concurrency = 2
+  if(ENV["KITCHEN_DRIVER"] == "aws")
+    concurrency = instances.length
+  end
+
+  sh "bin/kitchen test -c #{concurrency} #{build_instance}"
+  sh "bin/kitchen test -c #{concurrency} #{test_instance}"
 end
 
 # A task for trying to find outdated software versions based on what's being

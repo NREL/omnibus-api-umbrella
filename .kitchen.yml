@@ -1,3 +1,21 @@
+#<% require "kitchen-sync" %>
+
+<% if(ENV["KITCHEN_DRIVER"] == "aws") %>
+driver:
+  name: ec2
+  region: us-west-2
+  availability_zone: us-west-2b
+  aws_access_key_id: <%= ENV["AWS_ACCESS_KEY"] %>
+  aws_secret_access_key: <%= ENV["AWS_SECRET_KEY"] %>
+  aws_ssh_key_id: <%= ENV["AWS_SSH_KEY_ID"] %>
+  ssh_key: <%= ENV["AWS_SSH_KEY_PATH"] %>
+  associate_public_ip: true
+  flavor_id: c3.2xlarge
+  ebs_volume_size: 14
+  ebs_delete_on_termination: true
+  ebs_device_name: /dev/sda
+  # price: 0.10
+<% else %>
 driver:
   name: vagrant
   customize:
@@ -5,17 +23,24 @@ driver:
     memory: 2560
   synced_folders:
     - ['.', '/home/vagrant/api-umbrella']
+<% end %>
 
 provisioner:
   require_chef_omnibus: 11.16.4
 
 platforms:
-  - name: centos-6.5
+  - name: centos-6.6
     run_list: yum-epel::default
+    driver:
+      image_id: ami-a9de9c99
   - name: centos-7.0
     run_list: yum-epel::default
-  - name: debian-7.6
+    driver:
+      image_id: ami-c7d092f7
+  - name: debian-7.8
     run_list: apt::default
+    driver:
+      image_id: ami-17510927
   - name: ubuntu-12.04
     run_list: apt::default
   - name: ubuntu-14.04
@@ -26,6 +51,7 @@ suites:
     run_list:
       - omnibus::default
       - python-docutils
+      - vagrant_extras::default
       - vagrant_extras::passwordless_internal_ssh
       - api-umbrella::omnibus_build
 
@@ -37,15 +63,32 @@ suites:
       - packages::default
       - services::default
     attributes:
+      authorization:
+        sudo:
+          include_sudoers_d: true
+          sudoers_defaults:
+            - "env_reset"
+            - "!secure_path"
+            - "!requiretty"
       elasticsearch:
         version: 1.4.2
         allocated_memory: 256m
       java:
         jdk_version: 7
+      mongodb:
+        config:
+          smallfiles: true
       omnibus:
-        build_user:  vagrant
-        build_dir:   /home/vagrant/api-umbrella
+        build_user: vagrant
+        build_user_group: vagrant
+        build_dir: /home/vagrant/api-umbrella
         install_dir: /opt/api-umbrella
+        env:
+          api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
+          api_umbrella_iteration: <%= ENV["API_UMBRELLA_ITERATION"] %>
+          aws_access_key: <%= ENV["AWS_ACCESS_KEY"] %>
+          aws_secret_key: <%= ENV["AWS_SECRET_KEY"] %>
+          aws_s3_bucket: <%= ENV["AWS_S3_BUCKET"] %>
       packages:
         - unbound
       services:
@@ -55,7 +98,14 @@ suites:
     run_list:
       - api-umbrella::omnibus_test_built_package
     attributes:
-      api_umbrella:
+      omnibus:
+        build_dir: /home/vagrant/api-umbrella
+        env:
+          api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
+          api_umbrella_iteration: <%= ENV["API_UMBRELLA_ITERATION"] %>
+          aws_access_key: <%= ENV["AWS_ACCESS_KEY"] %>
+          aws_secret_key: <%= ENV["AWS_SECRET_KEY"] %>
+          aws_s3_bucket: <%= ENV["AWS_S3_BUCKET"] %>
     driver:
       customize:
         cpus: 1

@@ -20,6 +20,10 @@ group :host_machine do
   gem 'test-kitchen', '~> 1.2.1'
   gem 'kitchen-vagrant', '~> 0.15.0'
 
+  gem 'kitchen-sync'
+  gem 'kitchen-ec2', :github => 'gfloyd/kitchen-ec2', :branch => 'fix-spot-security-groups'
+  #gem 'kitchen-ec2', :github => 'test-kitchen/kitchen-ec2'
+
   # For checking for outdated version
   gem 'semverse', '~> 1.2.1'
 
