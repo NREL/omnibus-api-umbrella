@@ -4,7 +4,7 @@ homepage 'http://github.com/NREL/api-umbrella'
 
 install_path    '/opt/api-umbrella'
 build_version(ENV["API_UMBRELLA_VERSION"] || raise("API_UMBRELLA_VERSION environment variable must be set"))
-build_iteration 1
+build_iteration(ENV["API_UMBRELLA_ITERATION"] || 1)
 
 override :api_umbrella_router, version: 'master'
 override :api_umbrella_web, version: 'master'
