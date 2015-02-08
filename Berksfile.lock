@@ -1,7 +1,7 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: 9a0f678182735cb1628b80cc104d2907831886c3
+    revision: 5b7c292a8d9709ba6437b34783747654f91d1e32
   apt (~> 2.0)
   elasticsearch (~> 0.3.13)
   java (~> 1.31.0)
