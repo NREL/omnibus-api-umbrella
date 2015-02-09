@@ -10,10 +10,10 @@ driver:
   aws_ssh_key_id: <%= ENV["AWS_SSH_KEY_ID"] %>
   ssh_key: <%= ENV["AWS_SSH_KEY_PATH"] %>
   associate_public_ip: true
-  flavor_id: c3.2xlarge
-  ebs_volume_size: 14
+  flavor_id: c3.xlarge
+  ebs_volume_size: 20
   ebs_delete_on_termination: true
-  ebs_device_name: /dev/sda
+  ebs_device_name: /dev/sda1
   # price: 0.10
 <% else %>
 driver:
@@ -29,22 +29,32 @@ provisioner:
   require_chef_omnibus: 11.16.4
 
 platforms:
-  - name: centos-6.6
+  - name: centos-6.5
     run_list: yum-epel::default
     driver:
       image_id: ami-a9de9c99
+      username: root
   - name: centos-7.0
     run_list: yum-epel::default
     driver:
       image_id: ami-c7d092f7
+      username: centos
   - name: debian-7.8
     run_list: apt::default
     driver:
       image_id: ami-17510927
+      username: admin
   - name: ubuntu-12.04
     run_list: apt::default
+    driver:
+      image_id: ami-2b471c1b
+      username: ubuntu
   - name: ubuntu-14.04
     run_list: apt::default
+    driver:
+      image_id: ami-1b471c2b
+      username: ubuntu
+
 
 suites:
   - name: build
@@ -84,6 +94,7 @@ suites:
         build_dir: /home/vagrant/api-umbrella
         install_dir: /opt/api-umbrella
         env:
+          kitchen_driver: <%= ENV["KITCHEN_DRIVER"] %>
           api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
           api_umbrella_iteration: <%= ENV["API_UMBRELLA_ITERATION"] %>
           aws_access_key: <%= ENV["AWS_ACCESS_KEY"] %>
@@ -101,6 +112,7 @@ suites:
       omnibus:
         build_dir: /home/vagrant/api-umbrella
         env:
+          kitchen_driver: <%= ENV["KITCHEN_DRIVER"] %>
           api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
           api_umbrella_iteration: <%= ENV["API_UMBRELLA_ITERATION"] %>
           aws_access_key: <%= ENV["AWS_ACCESS_KEY"] %>
