@@ -108,7 +108,7 @@ describe "api-umbrella" do
   it "installs a sudoers.d file" do
     subject = file("/etc/sudoers.d/api-umbrella")
     expect(subject).to be_file
-    expect(subject).to be_mode(644)
+    expect(subject).to be_mode(440)
     expect(subject).to be_owned_by("root")
     expect(subject).to be_grouped_into("root")
   end

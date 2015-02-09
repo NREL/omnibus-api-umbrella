@@ -40,6 +40,8 @@ if [ ! -f /home/$DEPLOY_USER/.ssh/authorized_keys ]; then
   chmod 600 /home/$DEPLOY_USER/.ssh/authorized_keys
 fi
 
+chmod 440 /etc/sudoers.d/api-umbrella
+
 mkdir -p /opt/api-umbrella/etc
 mkdir -p /opt/api-umbrella/var/db
 mkdir -p /opt/api-umbrella/var/log
