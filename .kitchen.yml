@@ -32,29 +32,38 @@ platforms:
   - name: centos-6.5
     run_list: yum-epel::default
     driver:
+      <% if(ENV["KITCHEN_DRIVER"] == "aws") %>
       image_id: ami-a9de9c99
       username: root
+      <% end %>
   - name: centos-7.0
     run_list: yum-epel::default
     driver:
+      <% if(ENV["KITCHEN_DRIVER"] == "aws") %>
       image_id: ami-c7d092f7
       username: centos
+      <% end %>
   - name: debian-7.8
     run_list: apt::default
     driver:
+      <% if(ENV["KITCHEN_DRIVER"] == "aws") %>
       image_id: ami-17510927
       username: admin
+      <% end %>
   - name: ubuntu-12.04
     run_list: apt::default
     driver:
+      <% if(ENV["KITCHEN_DRIVER"] == "aws") %>
       image_id: ami-2b471c1b
       username: ubuntu
+      <% end %>
   - name: ubuntu-14.04
     run_list: apt::default
     driver:
+      <% if(ENV["KITCHEN_DRIVER"] == "aws") %>
       image_id: ami-1b471c2b
       username: ubuntu
-
+      <% end %>
 
 suites:
   - name: build
@@ -64,14 +73,6 @@ suites:
       - vagrant_extras::default
       - vagrant_extras::passwordless_internal_ssh
       - api-umbrella::omnibus_build
-
-      # Additional recipes for running tests after install has finished.
-      - java::default
-      - elasticsearch::default
-      - mongodb::default
-      - phantomjs::default
-      - packages::default
-      - services::default
     attributes:
       authorization:
         sudo:
@@ -80,31 +81,19 @@ suites:
             - "env_reset"
             - "!secure_path"
             - "!requiretty"
-      elasticsearch:
-        version: 1.4.2
-        allocated_memory: 256m
-      java:
-        jdk_version: 7
-      mongodb:
-        config:
-          smallfiles: true
       omnibus:
         build_user: vagrant
         build_user_group: vagrant
         build_dir: /home/vagrant/api-umbrella
         install_dir: /opt/api-umbrella
         env:
+          api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
           kitchen_driver: <%= ENV["KITCHEN_DRIVER"] %>
           api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
           api_umbrella_iteration: <%= ENV["API_UMBRELLA_ITERATION"] %>
           aws_access_key: <%= ENV["AWS_ACCESS_KEY"] %>
           aws_secret_key: <%= ENV["AWS_SECRET_KEY"] %>
           aws_s3_bucket: <%= ENV["AWS_S3_BUCKET"] %>
-      packages:
-        - unbound
-      services:
-        elasticsearch:
-          - start
   - name: test_install_package
     run_list:
       - api-umbrella::omnibus_test_built_package
@@ -112,6 +101,7 @@ suites:
       omnibus:
         build_dir: /home/vagrant/api-umbrella
         env:
+          api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
           kitchen_driver: <%= ENV["KITCHEN_DRIVER"] %>
           api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
           api_umbrella_iteration: <%= ENV["API_UMBRELLA_ITERATION"] %>

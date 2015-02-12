@@ -12,6 +12,11 @@ describe "api-umbrella" do
     expect(service("api-umbrella")).to be_enabled
   end
 
+  it "reported bin version matches package build version" do
+    env = YAML.load(File.read("/tmp/api_umbrella_omnibus_test_env.yml"))
+    expect(`api-umbrella --version`.strip).to eql("version #{env["api_umbrella_version"]}")
+  end
+
   it "reports the correct status regardless of HOME environment variable" do
     # This accounts for HOME being different under Ubuntu's boot than when
     # running "sudo /etc/init.d/api-umbrella *"

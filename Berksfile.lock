@@ -1,21 +1,15 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: 398b114374c8bdd72df1a10679e8a5fc3b5843da
+    revision: 2ed1f66c872dab9ce5ed5a89b541126a89d27666
   apt (~> 2.0)
-  elasticsearch (~> 0.3.13)
-  java (~> 1.31.0)
-  mongodb (~> 0.16.2)
   omnibus
     git: git://github.com/NREL-cookbooks/omnibus.git
     revision: d6575422e39a502f79b10bfb5c1bb7700910cbea
     branch: fix_rsync
-  packages (~> 0.4.0)
-  phantomjs (~> 1.0.3)
   python-docutils
     git: git://github.com/NREL-cookbooks/python-docutils.git
     revision: 65238c77e9729cdce238004ffee73ecdd2251121
-  services (~> 0.2.0)
   vagrant_extras
     git: git://github.com/NREL-cookbooks/vagrant_extras.git
     revision: 26f3580199145da3450ba512b4a566979e6ccdb4
@@ -23,18 +17,21 @@ DEPENDENCIES
 GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
-  api-umbrella (0.6.0)
-    aws (>= 0.0.0)
-    build-essential (>= 0.0.0)
-    curl (>= 0.0.0)
-    git (>= 0.0.0)
-    phantomjs (>= 0.0.0)
-    sudo (>= 0.0.0)
+  api-umbrella (0.7.0)
+    aws (~> 2.6.0)
+    build-essential (~> 2.1.3)
+    curl (~> 2.0.1)
+    elasticsearch (~> 0.3.13)
+    git (~> 4.1.0)
+    java (~> 1.31.0)
+    mongodb (~> 0.16.2)
+    phantomjs (~> 1.0.3)
+    sudo (~> 2.7.1)
   apt (2.6.1)
   ark (0.9.0)
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
-  aws (2.5.0)
+  aws (2.6.0)
   build-essential (2.1.3)
   chef-sugar (2.5.0)
   chef_handler (1.1.6)
@@ -71,7 +68,6 @@ GRAPH
     homebrew (~> 1.9)
     windows (~> 1.30)
     wix (~> 1.1)
-  packages (0.4.0)
   phantomjs (1.0.3)
     build-essential (>= 0.0.0)
     chocolatey (>= 0.0.0)
@@ -84,7 +80,6 @@ GRAPH
     build-essential (>= 0.0.0)
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
-  services (0.2.0)
   sudo (2.7.1)
   vagrant_extras (0.2.2)
     sudo (>= 0.0.0)
