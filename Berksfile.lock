@@ -1,7 +1,7 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: 2ed1f66c872dab9ce5ed5a89b541126a89d27666
+    revision: 1953cd4fab265d1f0f67c25021b348da016358cf
   apt (~> 2.0)
   omnibus
     git: git://github.com/NREL-cookbooks/omnibus.git
@@ -17,7 +17,7 @@ DEPENDENCIES
 GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
-  api-umbrella (0.7.0)
+  api-umbrella (0.7.1)
     aws (~> 2.6.0)
     build-essential (~> 2.1.3)
     curl (~> 2.0.1)

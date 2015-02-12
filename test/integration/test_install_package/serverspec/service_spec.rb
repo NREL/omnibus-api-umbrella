@@ -1,5 +1,7 @@
+require "bundler"
 require "serverspec"
 require "rest_client"
+require "yaml"
 
 set :backend, :exec
 
@@ -73,14 +75,14 @@ describe "api-umbrella" do
   end
 
   it "can be stopped and started again" do
-    expect(`/etc/init.d/api-umbrella stop 2>&1`).to include("OK")
+    expect(`sudo /etc/init.d/api-umbrella stop 2>&1`).to include("OK")
     expect($?.to_i).to eql(0)
 
     expect(service("api-umbrella")).to_not be_running
     expect(process("supervisord")).to_not be_running
-    expect(`/etc/init.d/api-umbrella status 2>&1`).to include("is stopped")
+    expect(`sudo /etc/init.d/api-umbrella status 2>&1`).to include("is stopped")
 
-    expect(`/etc/init.d/api-umbrella start 2>&1`).to include("OK")
+    expect(`sudo /etc/init.d/api-umbrella start 2>&1`).to include("OK")
     expect($?.to_i).to eql(0)
     expect(service("api-umbrella")).to be_running
     expect(process("supervisord")).to be_running
