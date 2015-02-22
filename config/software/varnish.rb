@@ -14,6 +14,10 @@ version "4.0.2" do
   source :md5 => "bf86f3630605c273b1bbadbbe518237a"
 end
 
+version "4.0.3" do
+  source :md5 => "16a683f2e41f7d80219cec5d4649380c"
+end
+
 source :url => "http://repo.varnish-cache.org/source/varnish-#{version}.tar.gz"
 
 relative_path "varnish-#{version}"
