@@ -127,9 +127,6 @@ task :outdated do
     "rubygems" => {
       :git => "https://github.com/rubygems/rubygems.git",
     },
-    "serf" => {
-      :git => "https://github.com/hashicorp/serf.git",
-    },
     "supervisor" => {
       :git => "https://github.com/Supervisor/supervisor.git",
     },
@@ -189,12 +186,9 @@ task :outdated do
 
         tag.downcase!
         tag.gsub!(/\^{}$/, "")
-        #tag.gsub!(/^[^0-9]+/, "")
         case(name)
         when "mongodb"
           tag.gsub!(/^r/, "")
-        when "passenger"
-          tag.gsub!(/^release-/, "")
         when "ruby"
           tag.gsub!(/_/, ".")
         when "varnish"

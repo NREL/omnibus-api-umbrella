@@ -26,11 +26,9 @@ override :python, version: '2.7.7'
 override :redis, version: '2.8.19'
 override :ruby, version: '2.1.5' # Hold at 2.1 as long as we're on Rails 3.2: https://github.com/rails/rails/pull/18160
 override :rubygems, version: '2.4.6'
-override :serf, version: '0.6.3'
 override :supervisor, version: '3.1.3'
 override :supervisor_mrlaforge, version: '0.6'
 override :supervisor_serialrestart, version: '0.1.1'
-override :unbound, version: '1.4.22'
 override :varnish, version: '4.0.3'
 
 # creates required build directories
