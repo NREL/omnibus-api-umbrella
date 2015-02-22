@@ -9,7 +9,7 @@ build_iteration(ENV["API_UMBRELLA_ITERATION"] || 1)
 override :api_umbrella_router, version: 'master'
 override :api_umbrella_web, version: 'master'
 override :beanstalkd, version: '1.10'
-override :bundler, version: '1.8.2'
+override :bundler, version: '1.7.13' # Hold at 1.7 due to current issues with 1.8 and rails-assets gems: https://github.com/rails-assets/rails-assets/issues/226
 override :dnsmasq, version: '2.72'
 override :elasticsearch, version: '1.4.4'
 override :elasticsearch_bigdesk, version: 'v2.5.0'

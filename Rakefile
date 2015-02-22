@@ -74,6 +74,7 @@ task :outdated do
     },
     "bundler" => {
       :git => "https://github.com/bundler/bundler.git",
+      :constraint => "~> 1.7.13",
     },
     "dnsmasq" => {
       :git => "git://thekelleys.org.uk/dnsmasq.git",
