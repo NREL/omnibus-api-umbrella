@@ -80,7 +80,7 @@ build do
       "--conf-path=#{install_dir}/embedded/etc/nginx/nginx.conf",
       "--pid-path=#{install_dir}/embedded/var/run/nginx.pid",
       "--lock-path=#{install_dir}/embedded/var/lock/subsys/nginx",
-      "--error-log-path=#{install_dir}/embedded/var/log/nginx/error.log",
+      "--error-log-path=stderr",
       "--http-log-path=#{install_dir}/embedded/var/log/nginx/access.log",
       "--http-client-body-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/client_body",
       "--http-proxy-temp-path=#{install_dir}/embedded/var/lib/nginx/tmp/proxy",
