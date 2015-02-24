@@ -9,7 +9,14 @@ source :git => "https://github.com/NREL/api-umbrella-static-site.git"
 relative_path "api-umbrella-static-site"
 
 build do
-  env = with_standard_compiler_flags(with_embedded_path)
+  env = with_standard_compiler_flags(with_embedded_path).merge({
+    # Force this app's bundling to happen with the API Umbrella version of
+    # Ruby, rather than the system omnibus version.
+    "GEM_PATH" => "/opt/api-umbrella/embedded/lib/ruby/gems/*",
+    "RUBY_ROOT" => "",
+    "RUBYLIB" => "",
+  })
+
   app_path = File.join(install_dir, "embedded/apps/static-site")
   bundle_path = File.join(app_path, "shared/bundle")
 
