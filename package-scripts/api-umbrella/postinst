@@ -24,8 +24,14 @@ getent passwd $DEPLOY_USER > /dev/null || \
   useradd -r -g $DEPLOY_GROUP -s /bin/bash \
     -d /home/$DEPLOY_USER -c "API Umbrella deployment user" $DEPLOY_USER
 
+# Add the deploy user to the app group, so the deploy user can read config
+# files.
+if ! groups $DEPLOY_USER | grep -q -E "\s$GROUP(\s|$)"; then
+  usermod -a -G $GROUP $DEPLOY_USER
+fi
+
 # Fix previously created deploy user that couldn't actually login.
-if getent passwd $DEPLOY_USER | grep "/sbin/nologin" > /dev/null; then
+if getent passwd $DEPLOY_USER | grep -q "/sbin/nologin"; then
   usermod -d /home/$DEPLOY_USER -s /bin/bash $DEPLOY_USER
 fi
 
