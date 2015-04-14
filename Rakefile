@@ -120,6 +120,7 @@ task :outdated do
     },
     "redis" => {
       :git => "https://github.com/antirez/redis.git",
+      :constraint => "~> 2.8.19",
     },
     "ruby" => {
       :git => "https://github.com/ruby/ruby.git",
@@ -130,9 +131,6 @@ task :outdated do
     },
     "supervisor" => {
       :git => "https://github.com/Supervisor/supervisor.git",
-    },
-    "supervisor_mrlaforge" => {
-      :git => "https://github.com/fschulze/mr.laforge.git",
     },
     "supervisor_serialrestart" => {
       :git => "https://github.com/native2k/supervisor-serialrestart.git",

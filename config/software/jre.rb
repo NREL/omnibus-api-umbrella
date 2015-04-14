@@ -16,7 +16,7 @@
 #
 
 name "jre"
-default_version "7u71-b14"
+default_version "7u75-b13"
 
 whitelist_file "jre/bin/javaws"
 whitelist_file "jre/bin/policytool"
@@ -32,12 +32,12 @@ version_build = version_parts[4]
 if Ohai['kernel']['machine'] =~ /x86_64/
   # TODO: download x86 version on x86 machines
   source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-#{version_with_update}-linux-x64.tar.gz",
-         :md5 => "7605134662f6c87131eca5745895fe84",
+         :md5 => "1869f0d2dac96372e3c345105543ba3e",
          :cookie => "s_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre#{version_major}-downloads-1880261.html;",
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
 else
   source :url => "http://download.oracle.com/otn-pub/java/jdk/#{version}/jre-#{version_with_update}-linux-i586.tar.gz",
-         :md5 => "90a6b9e2a32d06c18a3f16b485f0d1ea",
+         :md5 => "3a2a94b9cd76fa1323dd9a5aaf48383b",
          :cookie => "s_cc=true;oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre#{version_major}7-downloads-1880261.html;",
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
 end
