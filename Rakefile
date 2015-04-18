@@ -42,7 +42,8 @@ task :build do
   instance = "*" if(instance == "all")
 
   build_instance = "build-#{instance}"
-  test_instance = "test-install-package-#{instance}"
+  test_package_instance = "test-package-#{instance}"
+  test_internal_components_instance = "test-internal-components-#{instance}"
 
   concurrency = 2
   if(ENV["KITCHEN_DRIVER"] == "aws")
@@ -50,7 +51,8 @@ task :build do
   end
 
   sh "bin/kitchen test -c #{concurrency} #{build_instance}"
-  sh "bin/kitchen test -c #{concurrency} #{test_instance}"
+  sh "bin/kitchen test -c #{concurrency} #{test_package_instance}"
+  sh "bin/kitchen test -c #{concurrency} #{test_internal_components_instance}"
 end
 
 # A task for trying to find outdated software versions based on what's being

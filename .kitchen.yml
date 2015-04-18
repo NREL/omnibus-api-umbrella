@@ -94,9 +94,9 @@ suites:
           aws_access_key: <%= ENV["AWS_ACCESS_KEY"] %>
           aws_secret_key: <%= ENV["AWS_SECRET_KEY"] %>
           aws_s3_bucket: <%= ENV["AWS_S3_BUCKET"] %>
-  - name: test_install_package
+  - name: test_package
     run_list:
-      - api-umbrella::omnibus_test_built_package
+      - api-umbrella::omnibus_test_package
     attributes:
       omnibus:
         build_dir: /home/vagrant/api-umbrella
@@ -112,3 +112,21 @@ suites:
       customize:
         cpus: 1
         memory: 1536
+  - name: test_internal_components
+    run_list:
+      - api-umbrella::omnibus_test_internal_components
+    attributes:
+      omnibus:
+        build_dir: /home/vagrant/api-umbrella
+        env:
+          api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
+          kitchen_driver: <%= ENV["KITCHEN_DRIVER"] %>
+          api_umbrella_version: <%= ENV["API_UMBRELLA_VERSION"] %>
+          api_umbrella_iteration: <%= ENV["API_UMBRELLA_ITERATION"] %>
+          aws_access_key: <%= ENV["AWS_ACCESS_KEY"] %>
+          aws_secret_key: <%= ENV["AWS_SECRET_KEY"] %>
+          aws_s3_bucket: <%= ENV["AWS_S3_BUCKET"] %>
+    driver:
+      customize:
+        cpus: 2
+        memory: 3072

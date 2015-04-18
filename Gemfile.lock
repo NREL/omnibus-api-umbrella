@@ -19,7 +19,7 @@ GEM
   specs:
     CFPropertyList (2.3.1)
     addressable (2.3.8)
-    arr-pm (0.0.9)
+    arr-pm (0.0.10)
       cabin (> 0)
     backports (3.6.4)
     berkshelf (3.1.5)
@@ -63,7 +63,7 @@ GEM
       dep-selector-libgecode (~> 1.0)
       ffi (~> 1.9)
     erubis (2.7.0)
-    excon (0.45.1)
+    excon (0.45.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.8)
