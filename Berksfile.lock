@@ -1,7 +1,7 @@
 DEPENDENCIES
   api-umbrella
     git: git://github.com/NREL-cookbooks/api-umbrella.git
-    revision: d445cd39d8df1c88a11bdd248d8284f462b03415
+    revision: 6902a2563268fb219abd417e39964d1a5181a26a
   apt (~> 2.0)
   omnibus
     git: git://github.com/NREL-cookbooks/omnibus.git
