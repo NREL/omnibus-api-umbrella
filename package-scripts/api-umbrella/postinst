@@ -57,8 +57,10 @@ chmod 1777 /opt/api-umbrella/var/tmp
 
 chown -R $USER:$GROUP /opt/api-umbrella/etc /opt/api-umbrella/var
 chown -R $DEPLOY_USER:$DEPLOY_GROUP /opt/api-umbrella/embedded/apps
-chown $USER:$DEPLOY_GROUP /opt/api-umbrella/embedded/apps/web/shared/tmp
-chmod 774 /opt/api-umbrella/embedded/apps/web/shared/tmp
+chown -R $USER:$DEPLOY_GROUP /opt/api-umbrella/embedded/apps/web/shared/tmp
+chmod 775 /opt/api-umbrella/embedded/apps/web/shared/tmp
+find /opt/api-umbrella/embedded/apps/web/shared/tmp -type d -exec chmod 775 {} \;
+find /opt/api-umbrella/embedded/apps/web/shared/tmp -type f -exec chmod 664 {} \;
 
 # The ember-rails gem's handling of temp files isn't ideal when multiple users
 # might touch the files. So for now, just make these temp files globally
