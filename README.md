@@ -1,95 +1,42 @@
-api-umbrella Omnibus project
-======================
-This project creates full-stack platform-specific packages for
-`api-umbrella`!
+# API Umbrella Omnibus Packaging
+
+This project creates package installers for [API Umbrella](https://github.com/NREL/api-umbrella). Since API Umbrella depends on specific versions of a number of other open source components, this packages all of the dependencies into a single API Umbrella installer. To find the current packages, see the [downloads](http://apiumbrella.io/download/).
 
 Issues for this project are [maintained here](https://github.com/NREL/api-umbrella/issues).  
 
-Installation
-------------
-You must have a sane Ruby 1.9+ environment with Bundler installed. Ensure all
-the required gems are installed:
+## Build Targets
+
+We currently target 64bit installers for the following platforms:
+
+- Ubuntu 12.04
+- Ubuntu 14.04
+- Debian 7
+- Enterprise Linux 6 (CentOS/RedHat/Oracle/Scientific Linux)
+- Enterprise Linux 7 (CentOS/RedHat/Oracle/Scientific Linux)
+
+Other platforms can likely be targeted based on demand.
+
+## Usage
+
+To build new binary packages, first ensure you have a sane Ruby 1.9+ environment with bundler and the required gems installed:
 
 ```shell
 $ bundle install --binstubs
 ```
 
-Usage
------
-### Build
-
-You create a platform-specific package using the `build project` command:
+Next, to build packages for all of the supported platforms, run:
 
 ```shell
-$ bin/omnibus build api-umbrella
+$ ./bin/rake build
 ```
 
-The platform/architecture type of the package created will match the platform
-where the `build project` command is invoked. For example, running this command
-on a MacBook Pro will generate a Mac OS X package. After the build completes
-packages will be available in the `pkg/` folder.
+That script will ask a few questions to guide you through the process of building new binary packages. Either VirtualBox or AWS EC2 instances can be picked to perform the builds on.
 
-### Clean
+The build process consists of:
 
-You can clean up all temporary files generated during the build process with
-the `clean` command:
-
-```shell
-$ bin/omnibus clean api-umbrella
-```
-
-Adding the `--purge` purge option removes __ALL__ files generated during the
-build including the project install directory (`/opt/api-umbrella`) and
-the package cache directory (`/var/cache/omnibus/pkg`):
-
-```shell
-$ bin/omnibus clean api-umbrella --purge
-```
-
-### Help
-
-Full help for the Omnibus command line interface can be accessed with the
-`help` command:
-
-```shell
-$ bin/omnibus help
-```
-
-Kitchen-based Build Environment
--------------------------------
-Every Omnibus project ships will a project-specific
-[Berksfile](http://berkshelf.com/) that will allow you to build your omnibus projects on all of the projects listed
-in the `.kitchen.yml`. You can add/remove additional platforms as needed by
-changing the list found in the `.kitchen.yml` `platforms` YAML stanza.
-
-This build environment is designed to get you up-and-running quickly. However,
-there is nothing that restricts you to building on other platforms. Simply use
-the [omnibus cookbook](https://github.com/opscode-cookbooks/omnibus) to setup
-your desired platform and execute the build steps listed above.
-
-The default build environment requires Test Kitchen and VirtualBox for local
-development. Test Kitchen also exposes the ability to provision instances using
-various cloud providers like AWS, DigitalOcean, or OpenStack. For more
-information, please see the [Test Kitchen documentation](http://kitchen.ci).
-
-Once you have tweaked your `.kitchen.yml` (or `.kitchen.local.yml`) to your
-liking, you can bring up an individual build environment using the `kitchen`
-command.
-
-```shell
-$ bin/kitchen converge ubuntu-12.04
-```
-
-Then login to the instance and build the project as described in the Usage
-section:
-
-```shell
-$ bin/kitchen login ubuntu-12.04
-[vagrant@ubuntu...] $ cd api-umbrella
-[vagrant@ubuntu...] $ bundle install
-[vagrant@ubuntu...] $ ...
-[vagrant@ubuntu...] $ bin/omnibus build api-umbrella -l info
-```
-
-For a complete list of all commands and platforms, run `kitchen list` or
-`kitchen help`.
+- Building the new packages on each platform.
+  - [Omnibus](https://github.com/chef/omnibus) is used to perform these builds and packaging using the configuration found in the [`config`](https://github.com/NREL/omnibus-api-umbrella/tree/master/config) directory.
+- Testing each package by spinning up a brand new VM, installing the new package on it, and running some high-level sanity checks to ensure the packaging and installation is operating properly.
+  - The package tests can be found in the [`test/integration/test_package`](https://github.com/NREL/omnibus-api-umbrella/tree/master/test/integration/test_package) directory.
+- Testing all the internal API Umbrella components by spinning up a brand new VM, installing the new package on it, and running the internal test suite from each API Umbrella component.
+  - The test scripts can be found in the [`test/integration/test_internal_components`](https://github.com/NREL/omnibus-api-umbrella/tree/master/test/integration/test_internal_components) directory.
